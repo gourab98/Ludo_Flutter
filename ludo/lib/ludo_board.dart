@@ -20,6 +20,8 @@ class LudoBoard extends StatefulWidget {
 class _LudoBoardState extends State<LudoBoard> {
   var dice = Random();
   int number = 1;
+  int flag = 0;
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -61,6 +63,35 @@ class _LudoBoardState extends State<LudoBoard> {
                               },
                             ),
                           ),
+                          if (flag == 0)
+                            Glowing(
+                              color: Colors.green.shade600,
+                              offset: Offset(-250, -250),
+                              blurRadius: 150,
+                              spreadRadius: -30,
+                            ),
+                          if (flag == 1)
+                            Glowing(
+                                color: Colors.yellow.shade600,
+                                offset: Offset(250, -250),
+                                blurRadius: 150,
+                                spreadRadius: -30),
+                          if (flag == 2)
+                            Glowing(
+                              color: Colors.blue.shade600,
+                              offset: Offset(150, 150),
+                              spreadRadius: -130,
+                              blurRadius: 150,
+                            ),
+
+                          if (flag == 3)
+                            Glowing(
+                              color: Colors.red.shade600,
+                              offset: Offset(-150, 150),
+                              spreadRadius: -130,
+                              blurRadius: 150,
+                            ),
+
                           // LeftUp Board Color(Green)
                           CustomPaint(
                             size: Size(sizeHeight, sizeWeight),
@@ -193,6 +224,11 @@ class _LudoBoardState extends State<LudoBoard> {
               onTap: () {
                 setState(() {
                   number = dice.nextInt(6);
+                  if (number != 5) {
+                    flag++;
+                  }
+                  flag = flag % 4;
+                  print("Flag is = $flag");
                 });
               },
               child: Container(
@@ -210,4 +246,24 @@ class _LudoBoardState extends State<LudoBoard> {
       ),
     );
   }
+}
+
+Widget Glowing(
+    {required Color color,
+    required Offset offset,
+    required double spreadRadius,
+    required double blurRadius}) {
+  return Container(
+    decoration: BoxDecoration(
+      borderRadius: BorderRadius.circular(2),
+      boxShadow: [
+        BoxShadow(
+          spreadRadius: spreadRadius,
+          offset: offset,
+          color: color,
+          blurRadius: blurRadius,
+        ),
+      ],
+    ),
+  );
 }
