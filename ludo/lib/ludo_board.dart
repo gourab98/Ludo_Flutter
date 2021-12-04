@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:ludo/glowing_side.dart';
 import 'dart:math';
 
 import 'package:ludo/ludo_piece.dart';
@@ -21,6 +22,7 @@ class _LudoBoardState extends State<LudoBoard> {
   var dice = Random();
   int number = 1;
   int flag = 0;
+  int threeSix = 0;
 
   @override
   Widget build(BuildContext context) {
@@ -57,7 +59,7 @@ class _LudoBoardState extends State<LudoBoard> {
                                     decoration: BoxDecoration(
                                       border: Border.all(color: Colors.black),
                                     ),
-                                    //child: Text("$index"),
+                                    child: Text("$index"),
                                   ),
                                 );
                               },
@@ -224,11 +226,25 @@ class _LudoBoardState extends State<LudoBoard> {
               onTap: () {
                 setState(() {
                   number = dice.nextInt(6);
-                  if (number != 5) {
+                  // number = 5;
+                  if (number == 5 && threeSix != 2) {
+                    threeSix++;
+                  } else {
                     flag++;
+                    threeSix = 0;
                   }
+
                   flag = flag % 4;
-                  print("Flag is = $flag");
+                  // if (flag == 0) {
+                  //   print("Flag is $flag = Green");
+                  // } else if (flag == 1) {
+                  //   print("Flag is $flag = Yellow");
+                  // } else if (flag == 2) {
+                  //   print("Flag is $flag = Blue");
+                  // } else if (flag == 3) {
+                  //   print("Flag is $flag = Red");
+                  // }
+                  // print("Flag is = $flag");
                 });
               },
               child: Container(
@@ -246,24 +262,4 @@ class _LudoBoardState extends State<LudoBoard> {
       ),
     );
   }
-}
-
-Widget Glowing(
-    {required Color color,
-    required Offset offset,
-    required double spreadRadius,
-    required double blurRadius}) {
-  return Container(
-    decoration: BoxDecoration(
-      borderRadius: BorderRadius.circular(2),
-      boxShadow: [
-        BoxShadow(
-          spreadRadius: spreadRadius,
-          offset: offset,
-          color: color,
-          blurRadius: blurRadius,
-        ),
-      ],
-    ),
-  );
 }
