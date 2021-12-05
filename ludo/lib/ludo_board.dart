@@ -23,6 +23,30 @@ class _LudoBoardState extends State<LudoBoard> {
   int number = 1;
   int flag = 0;
   int threeSix = 0;
+  Map<String, bool> greenPiece = {
+    'g1': false,
+    'g2': false,
+    'g3': false,
+    'g4': false
+  };
+  Map<String, bool> yellowPiece = {
+    'y1': false,
+    'y2': false,
+    'y3': false,
+    'y4': false
+  };
+  Map<String, bool> bluePiece = {
+    'b1': false,
+    'b2': false,
+    'b3': false,
+    'b4': false
+  };
+  Map<String, bool> redPiece = {
+    'r1': false,
+    'r2': false,
+    'r3': false,
+    'r4': false
+  };
 
   @override
   Widget build(BuildContext context) {
@@ -104,26 +128,30 @@ class _LudoBoardState extends State<LudoBoard> {
                                 bottom: (size.height) * 6 / 15,
                                 color: Colors.green.shade800),
                           ),
-                          ludoPiece(
-                              left: boardSize * (1 / 15),
-                              top: boardSize * (1 / 15),
-                              pieceSize: pieceSize,
-                              color: Colors.green.shade300),
-                          ludoPiece(
-                              left: boardSize * (4 / 15),
-                              top: boardSize * (1 / 15),
-                              pieceSize: pieceSize,
-                              color: Colors.green.shade300),
-                          ludoPiece(
-                              left: boardSize * (1 / 15),
-                              top: boardSize * (4 / 15),
-                              pieceSize: pieceSize,
-                              color: Colors.green.shade300),
-                          ludoPiece(
-                              left: boardSize * (4 / 15),
-                              top: boardSize * (4 / 15),
-                              pieceSize: pieceSize,
-                              color: Colors.green.shade300),
+                          if (greenPiece['g1'] == true)
+                            ludoPiece(
+                                left: boardSize * (1 / 15),
+                                top: boardSize * (1 / 15),
+                                pieceSize: pieceSize,
+                                color: Colors.green.shade300),
+                          if (greenPiece['g2'] == true)
+                            ludoPiece(
+                                left: boardSize * (4 / 15),
+                                top: boardSize * (1 / 15),
+                                pieceSize: pieceSize,
+                                color: Colors.green.shade300),
+                          if (greenPiece['g3'] == true)
+                            ludoPiece(
+                                left: boardSize * (1 / 15),
+                                top: boardSize * (4 / 15),
+                                pieceSize: pieceSize,
+                                color: Colors.green.shade300),
+                          if (greenPiece['g4'] == true)
+                            ludoPiece(
+                                left: boardSize * (4 / 15),
+                                top: boardSize * (4 / 15),
+                                pieceSize: pieceSize,
+                                color: Colors.green.shade300),
                           //RightUp Board Color(Yellow)
                           CustomPaint(
                             size: Size(sizeHeight, sizeWeight),
@@ -229,6 +257,7 @@ class _LudoBoardState extends State<LudoBoard> {
                   // number = 5;
                   if (number == 5 && threeSix != 2) {
                     threeSix++;
+                    if (flag == 0) {}
                   } else {
                     flag++;
                     threeSix = 0;
