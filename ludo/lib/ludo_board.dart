@@ -340,9 +340,11 @@ class _LudoBoardState extends State<LudoBoard> {
                                       ),
                                     ),
                                     Center(
-                                      child: Text("$index",
-                                          style: TextStyle(
-                                              fontWeight: FontWeight.bold)),
+                                      child: Text(
+                                        "$index",
+                                        style: TextStyle(
+                                            fontWeight: FontWeight.bold),
+                                      ),
                                     ),
                                     CellColorOnBoard(
                                         CellColorOnBoard: greenCellColorOnBoard,
@@ -377,7 +379,7 @@ class _LudoBoardState extends State<LudoBoard> {
                                               ),
                                               decoration: BoxDecoration(
                                                 borderRadius:
-                                                    BorderRadius.circular(5),
+                                                    BorderRadius.circular(500),
                                                 border: Border.all(
                                                     color: Colors.black),
                                               ),
