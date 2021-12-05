@@ -118,7 +118,6 @@ class _LudoBoardState extends State<LudoBoard> {
                               blurRadius: 150,
                               spreadRadius: -130,
                             ),
-
                           // LeftUp Board Color(Green)
                           CustomPaint(
                             size: Size(sizeHeight, sizeWeight),
@@ -129,6 +128,14 @@ class _LudoBoardState extends State<LudoBoard> {
                                 bottom: (size.height) * 6 / 15,
                                 color: Colors.green.shade800),
                           ),
+                          // Container(
+                          //   height: pieceSize,
+                          //   width: pieceSize,
+                          //   decoration: BoxDecoration(
+                          //     borderRadius: BorderRadius.circular(30),
+                          //     color: Colors.amber,
+                          //   ),
+                          // ),
                           if (greenPiece['g1'] == true)
                             ludoPiece(
                                 left: boardSize * (1 / 15),
