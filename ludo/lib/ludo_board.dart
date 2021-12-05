@@ -50,12 +50,15 @@ class _LudoBoardState extends State<LudoBoard> {
     'r3': false,
     'r4': false
   };
-
+  // Each Color decoration list:
   List greenCellColorOnBoard = [91, 106, 107, 108, 109, 110];
   List yellowCellColorOnBoard = [23, 22, 37, 52, 67, 82];
   List blueCellColorOnBoard = [133, 118, 117, 116, 115, 114];
   List redCellColorOnBoard = [201, 202, 187, 172, 157, 142];
+  // Final Cell List:
   List finalCellColorOnBoard = [96, 97, 98, 111, 112, 113, 126, 127, 128];
+  // All Four(4) Stars List:
+  List allStar = [91, 23, 133, 201];
 
   List greenPiecePath = [
     91,
@@ -362,10 +365,25 @@ class _LudoBoardState extends State<LudoBoard> {
                                         CellColorOnBoard: finalCellColorOnBoard,
                                         color: Colors.indigo.shade200,
                                         index: index),
-                                    CellColorOnBoard(
-                                        CellColorOnBoard: redPiecePath,
-                                        color: Colors.amber,
-                                        index: index)
+                                    Center(
+                                      child: allStar.contains(index)
+                                          ? Container(
+                                              child: Center(
+                                                child: Icon(
+                                                  Icons.star,
+                                                  size: pieceSize,
+                                                  color: Colors.black54,
+                                                ),
+                                              ),
+                                              decoration: BoxDecoration(
+                                                borderRadius:
+                                                    BorderRadius.circular(5),
+                                                border: Border.all(
+                                                    color: Colors.black),
+                                              ),
+                                            )
+                                          : Container(),
+                                    )
                                   ],
                                 );
                               },
