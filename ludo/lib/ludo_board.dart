@@ -377,12 +377,6 @@ class _LudoBoardState extends State<LudoBoard> {
                                                   color: Colors.black54,
                                                 ),
                                               ),
-                                              decoration: BoxDecoration(
-                                                borderRadius:
-                                                    BorderRadius.circular(500),
-                                                border: Border.all(
-                                                    color: Colors.black),
-                                              ),
                                             )
                                           : Container(),
                                     )
