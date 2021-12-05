@@ -1,3 +1,5 @@
+import 'dart:ui';
+
 import 'package:flutter/material.dart';
 import 'package:ludo/glowing_side.dart';
 import 'dart:math';
@@ -48,6 +50,11 @@ class _LudoBoardState extends State<LudoBoard> {
     'r4': false
   };
 
+  List greenCellColorOnBoard = [91, 106, 107, 108, 109, 110];
+  List yellowCellColorOnBoard = [23, 22, 37, 52, 67, 82];
+  List blueCellColorOnBoard = [133, 118, 117, 116, 115, 114];
+  List redCellColorOnBoard = [201, 202, 187, 172, 157, 142];
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -78,13 +85,97 @@ class _LudoBoardState extends State<LudoBoard> {
                             children: List<Widget>.generate(
                               225,
                               (index) {
-                                return GridTile(
-                                  child: Container(
-                                    decoration: BoxDecoration(
-                                      border: Border.all(color: Colors.black),
+                                return Stack(
+                                  children: [
+                                    GridTile(
+                                      child: Container(
+                                        decoration: BoxDecoration(
+                                          borderRadius:
+                                              BorderRadius.circular(5),
+                                          border:
+                                              Border.all(color: Colors.black),
+                                        ),
+                                      ),
                                     ),
-                                    child: Text("$index"),
-                                  ),
+                                    Center(
+                                      child: Text(
+                                        "$index",
+                                        style: TextStyle(
+                                            fontWeight: FontWeight.bold),
+                                      ),
+                                    ),
+                                    Center(
+                                      child: greenCellColorOnBoard
+                                              .contains(index)
+                                          ? Container(
+                                              child:
+                                                  Center(child: Text("$index")),
+                                              height: pieceSize,
+                                              width: pieceSize,
+                                              decoration: BoxDecoration(
+                                                color: Colors.green.shade200,
+                                                borderRadius:
+                                                    BorderRadius.circular(5),
+                                                border: Border.all(
+                                                    color: Colors.black),
+                                              ),
+                                            )
+                                          : Container(),
+                                    ),
+                                    Center(
+                                      child: yellowCellColorOnBoard
+                                              .contains(index)
+                                          ? Container(
+                                              child:
+                                                  Center(child: Text("$index")),
+                                              height: pieceSize,
+                                              width: pieceSize,
+                                              decoration: BoxDecoration(
+                                                color: Colors.yellow.shade200,
+                                                borderRadius:
+                                                    BorderRadius.circular(5),
+                                                border: Border.all(
+                                                    color: Colors.black),
+                                              ),
+                                            )
+                                          : Container(),
+                                    ),
+                                    Center(
+                                      child: blueCellColorOnBoard
+                                              .contains(index)
+                                          ? Container(
+                                              child:
+                                                  Center(child: Text("$index")),
+                                              height: pieceSize,
+                                              width: pieceSize,
+                                              decoration: BoxDecoration(
+                                                color: Colors.blue.shade200,
+                                                borderRadius:
+                                                    BorderRadius.circular(5),
+                                                border: Border.all(
+                                                    color: Colors.black),
+                                              ),
+                                            )
+                                          : Container(),
+                                    ),
+                                    Center(
+                                      child: redCellColorOnBoard.contains(index)
+                                          ? Container(
+                                              child:
+                                                  Center(child: Text("$index")),
+                                              height: pieceSize,
+                                              width: pieceSize,
+                                              decoration: BoxDecoration(
+                                                color: Colors.red.shade200,
+                                                borderRadius:
+                                                    BorderRadius.circular(5),
+                                                border: Border.all(
+                                                    color: Colors.black),
+                                              ),
+                                            )
+                                          : Container(),
+                                    ),
+                                  ],
                                 );
                               },
                             ),
@@ -128,6 +219,13 @@ class _LudoBoardState extends State<LudoBoard> {
                                 bottom: (size.height) * 6 / 15,
                                 color: Colors.green.shade800),
                           ),
+                          // Center(
+                          //   child: greenCellColorOnBoard.contains(Widget.index)
+                          //       ? Container(
+                          //           color: Colors.green,
+                          //         )
+                          //       : Container(),
+                          // ),
                           // Container(
                           //   height: pieceSize,
                           //   width: pieceSize,
