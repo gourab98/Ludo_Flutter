@@ -14,3 +14,8 @@ Trying to build ludo in flutter.
 ## Bugs:
 
 - Sometimes ludo's green sides doesn't glow. 
+
+# Progressing UI
+
+![alt text](https://github.com/gourab98/Ludo_Flutter/blob/main/ludo/flutter_01.png)
+
