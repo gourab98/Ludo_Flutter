@@ -98,10 +98,11 @@ class _LudoBoardState extends State<LudoBoard> {
                             ),
                           if (flag == 1)
                             Glowing(
-                                color: Colors.yellow.shade600,
-                                offset: Offset(250, -250),
-                                blurRadius: 150,
-                                spreadRadius: -30),
+                              color: Colors.yellow.shade600,
+                              offset: Offset(250, -250),
+                              blurRadius: 150,
+                              spreadRadius: -30,
+                            ),
                           if (flag == 2)
                             Glowing(
                               color: Colors.blue.shade600,
@@ -114,8 +115,8 @@ class _LudoBoardState extends State<LudoBoard> {
                             Glowing(
                               color: Colors.red.shade600,
                               offset: Offset(-150, 150),
-                              spreadRadius: -130,
                               blurRadius: 150,
+                              spreadRadius: -130,
                             ),
 
                           // LeftUp Board Color(Green)
@@ -162,26 +163,30 @@ class _LudoBoardState extends State<LudoBoard> {
                                 bottom: (size.height) * 6 / 15,
                                 color: Colors.yellow.shade800),
                           ),
-                          ludoPiece(
-                              left: boardSize * (10 / 15),
-                              top: boardSize * (1 / 15),
-                              pieceSize: pieceSize,
-                              color: Colors.yellow.shade300),
-                          ludoPiece(
-                              left: boardSize * (13 / 15),
-                              top: boardSize * (1 / 15),
-                              pieceSize: pieceSize,
-                              color: Colors.yellow.shade300),
-                          ludoPiece(
-                              left: boardSize * (10 / 15),
-                              top: boardSize * (4 / 15),
-                              pieceSize: pieceSize,
-                              color: Colors.yellow.shade300),
-                          ludoPiece(
-                              left: boardSize * (13 / 15),
-                              top: boardSize * (4 / 15),
-                              pieceSize: pieceSize,
-                              color: Colors.yellow.shade300),
+                          if (yellowPiece['y1'] == true)
+                            ludoPiece(
+                                left: boardSize * (10 / 15),
+                                top: boardSize * (1 / 15),
+                                pieceSize: pieceSize,
+                                color: Colors.yellow.shade300),
+                          if (yellowPiece['y2'] == true)
+                            ludoPiece(
+                                left: boardSize * (13 / 15),
+                                top: boardSize * (1 / 15),
+                                pieceSize: pieceSize,
+                                color: Colors.yellow.shade300),
+                          if (yellowPiece['y3'] == true)
+                            ludoPiece(
+                                left: boardSize * (10 / 15),
+                                top: boardSize * (4 / 15),
+                                pieceSize: pieceSize,
+                                color: Colors.yellow.shade300),
+                          if (yellowPiece['y4'] == true)
+                            ludoPiece(
+                                left: boardSize * (13 / 15),
+                                top: boardSize * (4 / 15),
+                                pieceSize: pieceSize,
+                                color: Colors.yellow.shade300),
                           //LeftDown Board Color(Red)
                           CustomPaint(
                             size: Size(sizeHeight, sizeWeight),
@@ -192,26 +197,30 @@ class _LudoBoardState extends State<LudoBoard> {
                                 bottom: size.height,
                                 color: Colors.red.shade800),
                           ),
-                          ludoPiece(
-                              left: boardSize * (1 / 15),
-                              top: boardSize * (10 / 15),
-                              pieceSize: pieceSize,
-                              color: Colors.red.shade300),
-                          ludoPiece(
-                              left: boardSize * (4 / 15),
-                              top: boardSize * (10 / 15),
-                              pieceSize: pieceSize,
-                              color: Colors.red.shade300),
-                          ludoPiece(
-                              left: boardSize * (1 / 15),
-                              top: boardSize * (13 / 15),
-                              pieceSize: pieceSize,
-                              color: Colors.red.shade300),
-                          ludoPiece(
-                              left: boardSize * (4 / 15),
-                              top: boardSize * (13 / 15),
-                              pieceSize: pieceSize,
-                              color: Colors.red.shade300),
+                          if (bluePiece['b1'] == true)
+                            ludoPiece(
+                                left: boardSize * (1 / 15),
+                                top: boardSize * (10 / 15),
+                                pieceSize: pieceSize,
+                                color: Colors.red.shade300),
+                          if (bluePiece['b2'] == true)
+                            ludoPiece(
+                                left: boardSize * (4 / 15),
+                                top: boardSize * (10 / 15),
+                                pieceSize: pieceSize,
+                                color: Colors.red.shade300),
+                          if (bluePiece['b3'] == true)
+                            ludoPiece(
+                                left: boardSize * (1 / 15),
+                                top: boardSize * (13 / 15),
+                                pieceSize: pieceSize,
+                                color: Colors.red.shade300),
+                          if (bluePiece['b4'] == true)
+                            ludoPiece(
+                                left: boardSize * (4 / 15),
+                                top: boardSize * (13 / 15),
+                                pieceSize: pieceSize,
+                                color: Colors.red.shade300),
                           // RightDown Board Color(Blue):
                           CustomPaint(
                             size: Size(sizeHeight, sizeWeight),
@@ -223,26 +232,30 @@ class _LudoBoardState extends State<LudoBoard> {
                               color: Colors.blue.shade800,
                             ),
                           ),
-                          ludoPiece(
-                              left: boardSize * (10 / 15),
-                              top: boardSize * (10 / 15),
-                              pieceSize: pieceSize,
-                              color: Colors.blue.shade300),
-                          ludoPiece(
-                              left: boardSize * (13 / 15),
-                              top: boardSize * (10 / 15),
-                              pieceSize: pieceSize,
-                              color: Colors.blue.shade300),
-                          ludoPiece(
-                              left: boardSize * (10 / 15),
-                              top: boardSize * (13 / 15),
-                              pieceSize: pieceSize,
-                              color: Colors.blue.shade300),
-                          ludoPiece(
-                              left: boardSize * (13 / 15),
-                              top: boardSize * (13 / 15),
-                              pieceSize: pieceSize,
-                              color: Colors.blue.shade300),
+                          if (redPiece['r1'] == true)
+                            ludoPiece(
+                                left: boardSize * (10 / 15),
+                                top: boardSize * (10 / 15),
+                                pieceSize: pieceSize,
+                                color: Colors.blue.shade300),
+                          if (redPiece['r2'] == true)
+                            ludoPiece(
+                                left: boardSize * (13 / 15),
+                                top: boardSize * (10 / 15),
+                                pieceSize: pieceSize,
+                                color: Colors.blue.shade300),
+                          if (redPiece['r3'] == true)
+                            ludoPiece(
+                                left: boardSize * (10 / 15),
+                                top: boardSize * (13 / 15),
+                                pieceSize: pieceSize,
+                                color: Colors.blue.shade300),
+                          if (redPiece['r4'] == true)
+                            ludoPiece(
+                                left: boardSize * (13 / 15),
+                                top: boardSize * (13 / 15),
+                                pieceSize: pieceSize,
+                                color: Colors.blue.shade300),
                         ],
                       ),
                     ),
@@ -255,24 +268,52 @@ class _LudoBoardState extends State<LudoBoard> {
                 setState(() {
                   number = dice.nextInt(6);
                   // number = 5;
+                  flag = flag % 4;
+                  if (flag == 0) {
+                    print("Flag is $flag = Green value =${number + 1}");
+                  } else if (flag == 1) {
+                    print("Flag is $flag = Yellow value =${number + 1}");
+                  } else if (flag == 2) {
+                    print("Flag is $flag = Blue value =${number + 1}");
+                  } else if (flag == 3) {
+                    print("Flag is $flag = Red value =${number + 1}");
+                  }
+
                   if (number == 5 && threeSix != 2) {
                     threeSix++;
-                    if (flag == 0) {}
+                    if (flag == 0) {
+                      greenPiece['g1'] = true;
+                    }
+                    if (flag == 1) {
+                      yellowPiece['y1'] = true;
+                    }
+                    if (flag == 2) {
+                      bluePiece['b1'] = true;
+                    }
+                    if (flag == 3) {
+                      redPiece['r1'] = true;
+                    }
                   } else {
                     flag++;
                     threeSix = 0;
                   }
-
-                  flag = flag % 4;
-                  // if (flag == 0) {
-                  //   print("Flag is $flag = Green");
-                  // } else if (flag == 1) {
-                  //   print("Flag is $flag = Yellow");
-                  // } else if (flag == 2) {
-                  //   print("Flag is $flag = Blue");
-                  // } else if (flag == 3) {
-                  //   print("Flag is $flag = Red");
+                  // print("g1=== ${greenPiece['g1']}");
+                  // print("y1=== ${yellowPiece['y1']}");
+                  // print("b1=== ${bluePiece['b1']}");
+                  // print("r1=== ${redPiece['r1']}");
+                  // for (var k in greenPiece.keys) {
+                  //   print("Green Piece $k = ${greenPiece[k]}");
                   // }
+                  // for (var k in yellowPiece.keys) {
+                  //   print("Yellow Piece $k = ${yellowPiece[k]}");
+                  // }
+                  // for (var k in bluePiece.keys) {
+                  //   print("Blue Piece $k = ${bluePiece[k]}");
+                  // }
+                  // for (var k in redPiece.keys) {
+                  //   print("Red Piece $k = ${redPiece[k]}");
+                  // }
+
                   // print("Flag is = $flag");
                 });
               },
