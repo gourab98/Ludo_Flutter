@@ -657,7 +657,7 @@ class _LudoBoardState extends State<LudoBoard> {
                 setState(() {
                   number = dice.nextInt(6);
                   //g1 experimental moves:
-                  if (g1 + number + 1 <= 56 && greenPiece['g1'] == true) {
+                  if (g1 + number + 1 <= 56) {
                     g1Clear = g1;
                     g1 = number + g1 + 1;
                   }
