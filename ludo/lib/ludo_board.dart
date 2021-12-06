@@ -61,7 +61,7 @@ class _LudoBoardState extends State<LudoBoard> {
   // All Four(4) Stars List:
   List allStar = [91, 23, 133, 201];
 
-  //Green Piece
+  //All Piecess
   int g1 = 0;
   int y1 = 0;
   int b1 = 0;
@@ -437,11 +437,6 @@ class _LudoBoardState extends State<LudoBoard> {
                                             )
                                           : Container(),
                                     ),
-
-                                    // CellColorOnBoard(
-                                    //     CellColorOnBoard: allPathWithOutStar,
-                                    //     color: Colors.white,
-                                    //     index: index),
                                     Center(
                                       child: Tile(
                                         index: index,
@@ -654,13 +649,11 @@ class _LudoBoardState extends State<LudoBoard> {
                 setState(() {
                   number = dice.nextInt(6);
                   //g1 experimental moves:
-                  if (g1 + number + 1 <= 56 &&
-                      greenPiece['g1'] == true &&
-                      flag == 0) {
-                    g1 = number + g1 + 1;
-                  }
+                  // if (g1 + number + 1 <= 56 && greenPiece['g1'] == true) {
+                  //   g1 = number + g1 + 1;
+                  // }
                   // number = 5;
-                  flag = flag % 4;
+//                  flag = flag % 4;
                   if (flag == 0) {
                     print("Flag is $flag = Green value =${number + 1}");
                   } else if (flag == 1) {
@@ -687,47 +680,30 @@ class _LudoBoardState extends State<LudoBoard> {
                     }
                   } else {
                     flag++;
+                    if (flag >= 4) {
+                      flag = 0;
+                    }
                     threeSix = 0;
                   }
-
+                  // print("$flag");
+                  // First moves:
                   if (g1 + number + 1 <= 56 &&
                       greenPiece['g1'] == true &&
                       flag == 0) {
                     g1 = number + g1 + 1;
-                  }
-                  if (y1 + number + 1 <= 56 &&
+                  } else if (y1 + number + 1 <= 56 &&
                       yellowPiece['y1'] == true &&
                       flag == 1) {
                     y1 = number + y1 + 1;
-                  }
-                  if (b1 + number + 1 <= 56 &&
+                  } else if (b1 + number + 1 <= 56 &&
                       bluePiece['b1'] == true &&
                       flag == 2) {
                     b1 = number + b1 + 1;
-                  }
-                  if (r1 + number + 1 <= 56 &&
+                  } else if (r1 + number + 1 <= 56 &&
                       redPiece['r1'] == true &&
                       flag == 3) {
                     r1 = number + r1 + 1;
                   }
-                  // print("g1=== ${greenPiece['g1']}");
-                  // print("y1=== ${yellowPiece['y1']}");
-                  // print("b1=== ${bluePiece['b1']}");
-                  // print("r1=== ${redPiece['r1']}");
-                  // for (var k in greenPiece.keys) {
-                  //   print("Green Piece $k = ${greenPiece[k]}");
-                  // }
-                  // for (var k in yellowPiece.keys) {
-                  //   print("Yellow Piece $k = ${yellowPiece[k]}");
-                  // }
-                  // for (var k in bluePiece.keys) {
-                  //   print("Blue Piece $k = ${bluePiece[k]}");
-                  // }
-                  // for (var k in redPiece.keys) {
-                  //   print("Red Piece $k = ${redPiece[k]}");
-                  // }
-
-                  // print("Flag is = $flag");
                 });
               },
               child: Container(
