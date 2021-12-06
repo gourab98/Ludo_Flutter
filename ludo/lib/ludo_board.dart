@@ -1,6 +1,7 @@
 import 'dart:ui';
 
 import 'package:flutter/material.dart';
+import 'package:ludo/anti_tile.dart';
 import 'package:ludo/cell_color_on_board.dart';
 import 'package:ludo/glowing_side.dart';
 import 'dart:math';
@@ -63,6 +64,7 @@ class _LudoBoardState extends State<LudoBoard> {
 
   //All Piecess
   int g1 = 0;
+  int g1Clear = 0;
   int y1 = 0;
   int b1 = 0;
   int r1 = 0;
@@ -445,6 +447,12 @@ class _LudoBoardState extends State<LudoBoard> {
                                       ),
                                     ),
                                     Center(
+                                      child: AntiTile(
+                                        index: index,
+                                        accessedCell: greenPiecePath[g1Clear],
+                                      ),
+                                    ),
+                                    Center(
                                       child: Tile(
                                         index: index,
                                         color: Colors.yellow,
@@ -649,9 +657,10 @@ class _LudoBoardState extends State<LudoBoard> {
                 setState(() {
                   number = dice.nextInt(6);
                   //g1 experimental moves:
-                  // if (g1 + number + 1 <= 56 && greenPiece['g1'] == true) {
-                  //   g1 = number + g1 + 1;
-                  // }
+                  if (g1 + number + 1 <= 56 && greenPiece['g1'] == true) {
+                    g1Clear = g1;
+                    g1 = number + g1 + 1;
+                  }
                   // number = 5;
 //                  flag = flag % 4;
                   if (flag == 0) {
@@ -687,23 +696,23 @@ class _LudoBoardState extends State<LudoBoard> {
                   }
                   // print("$flag");
                   // First moves:
-                  if (g1 + number + 1 <= 56 &&
-                      greenPiece['g1'] == true &&
-                      flag == 0) {
-                    g1 = number + g1 + 1;
-                  } else if (y1 + number + 1 <= 56 &&
-                      yellowPiece['y1'] == true &&
-                      flag == 1) {
-                    y1 = number + y1 + 1;
-                  } else if (b1 + number + 1 <= 56 &&
-                      bluePiece['b1'] == true &&
-                      flag == 2) {
-                    b1 = number + b1 + 1;
-                  } else if (r1 + number + 1 <= 56 &&
-                      redPiece['r1'] == true &&
-                      flag == 3) {
-                    r1 = number + r1 + 1;
-                  }
+                  // if (g1 + number + 1 <= 56 &&
+                  //     greenPiece['g1'] == true &&
+                  //     flag == 0) {
+                  //   g1 = number + g1 + 1;
+                  // } else if (y1 + number + 1 <= 56 &&
+                  //     yellowPiece['y1'] == true &&
+                  //     flag == 1) {
+                  //   y1 = number + y1 + 1;
+                  // } else if (b1 + number + 1 <= 56 &&
+                  //     bluePiece['b1'] == true &&
+                  //     flag == 2) {
+                  //   b1 = number + b1 + 1;
+                  // } else if (r1 + number + 1 <= 56 &&
+                  //     redPiece['r1'] == true &&
+                  //     flag == 3) {
+                  //   r1 = number + r1 + 1;
+                  // }
                 });
               },
               child: Container(
