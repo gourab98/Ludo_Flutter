@@ -63,6 +63,9 @@ class _LudoBoardState extends State<LudoBoard> {
 
   //Green Piece
   int g1 = 0;
+  int y1 = 0;
+  int b1 = 0;
+  int r1 = 0;
   List greenPiecePath = [
     91,
     92,
@@ -299,6 +302,56 @@ class _LudoBoardState extends State<LudoBoard> {
     142,
     127,
   ];
+  List allPathWithOutStar = [
+    92,
+    93,
+    94,
+    95,
+    81,
+    66,
+    51,
+    36,
+    21,
+    6,
+    7,
+    8,
+    38,
+    53,
+    68,
+    83,
+    99,
+    100,
+    101,
+    102,
+    103,
+    104,
+    119,
+    134,
+    132,
+    131,
+    130,
+    129,
+    143,
+    158,
+    173,
+    188,
+    203,
+    218,
+    217,
+    216,
+    186,
+    171,
+    156,
+    141,
+    125,
+    124,
+    123,
+    122,
+    121,
+    120,
+    105,
+    90,
+  ];
 
   @override
   Widget build(BuildContext context) {
@@ -335,6 +388,7 @@ class _LudoBoardState extends State<LudoBoard> {
                                     GridTile(
                                       child: Container(
                                         decoration: BoxDecoration(
+                                          color: Colors.white,
                                           borderRadius:
                                               BorderRadius.circular(5),
                                           border:
@@ -383,10 +437,37 @@ class _LudoBoardState extends State<LudoBoard> {
                                             )
                                           : Container(),
                                     ),
+
+                                    // CellColorOnBoard(
+                                    //     CellColorOnBoard: allPathWithOutStar,
+                                    //     color: Colors.white,
+                                    //     index: index),
                                     Center(
                                       child: Tile(
                                         index: index,
+                                        color: Colors.green,
                                         accessedCell: greenPiecePath[g1],
+                                      ),
+                                    ),
+                                    Center(
+                                      child: Tile(
+                                        index: index,
+                                        color: Colors.yellow,
+                                        accessedCell: yellowPiecePath[y1],
+                                      ),
+                                    ),
+                                    Center(
+                                      child: Tile(
+                                        index: index,
+                                        color: Colors.blue,
+                                        accessedCell: bluePiecePath[b1],
+                                      ),
+                                    ),
+                                    Center(
+                                      child: Tile(
+                                        index: index,
+                                        color: Colors.red,
+                                        accessedCell: redPiecePath[r1],
                                       ),
                                     ),
                                   ],
@@ -573,7 +654,11 @@ class _LudoBoardState extends State<LudoBoard> {
                 setState(() {
                   number = dice.nextInt(6);
                   //g1 experimental moves:
-                  g1 = number + g1 + 1;
+                  if (g1 + number + 1 <= 56 &&
+                      greenPiece['g1'] == true &&
+                      flag == 0) {
+                    g1 = number + g1 + 1;
+                  }
                   // number = 5;
                   flag = flag % 4;
                   if (flag == 0) {
@@ -603,6 +688,27 @@ class _LudoBoardState extends State<LudoBoard> {
                   } else {
                     flag++;
                     threeSix = 0;
+                  }
+
+                  if (g1 + number + 1 <= 56 &&
+                      greenPiece['g1'] == true &&
+                      flag == 0) {
+                    g1 = number + g1 + 1;
+                  }
+                  if (y1 + number + 1 <= 56 &&
+                      yellowPiece['y1'] == true &&
+                      flag == 1) {
+                    y1 = number + y1 + 1;
+                  }
+                  if (b1 + number + 1 <= 56 &&
+                      bluePiece['b1'] == true &&
+                      flag == 2) {
+                    b1 = number + b1 + 1;
+                  }
+                  if (r1 + number + 1 <= 56 &&
+                      redPiece['r1'] == true &&
+                      flag == 3) {
+                    r1 = number + r1 + 1;
                   }
                   // print("g1=== ${greenPiece['g1']}");
                   // print("y1=== ${yellowPiece['y1']}");
