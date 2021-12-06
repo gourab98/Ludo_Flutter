@@ -379,7 +379,26 @@ class _LudoBoardState extends State<LudoBoard> {
                                               ),
                                             )
                                           : Container(),
+                                    ),
+                                    Center(
+                                      child: Tile(
+                                        index: index,
+                                        accessedCell: greenPiecePath[3],
+                                      ),
                                     )
+
+                                    // greenPiecePath.map((e) => Tile(index: e)).toList(),
+                                    // greenPiecePath
+                                    //     .map((13) => Tile(
+                                    //           index: 13,
+                                    //         ))
+                                    //     .toList(),
+
+                                    // greenPiecePath.elementAt(13),
+                                    // Container(
+                                    //   child: greenPiecePath.elementAt(23),
+                                    //   color: Colors.amber,
+                                    // ),
                                   ],
                                 );
                               },
@@ -626,6 +645,42 @@ class _LudoBoardState extends State<LudoBoard> {
           ],
         ),
       ),
+    );
+  }
+}
+
+class Tile extends StatefulWidget {
+  Tile({
+    required this.index,
+    required this.accessedCell,
+    Key? key,
+  }) : super(key: key);
+
+  final int index;
+  final int accessedCell;
+
+  @override
+  State<Tile> createState() => _TileState();
+}
+
+class _TileState extends State<Tile> {
+  bool _isAccessed = false;
+
+  @override
+  Widget build(BuildContext context) {
+    if (widget.accessedCell == widget.index) {
+      _isAccessed = true;
+    }
+
+    return Container(
+      decoration: BoxDecoration(
+        //color: Colors.amber,
+        borderRadius: BorderRadius.circular(5),
+        border:
+            Border.all(color: _isAccessed ? Colors.blue : Colors.transparent),
+      ),
+      child:
+          FittedBox(fit: BoxFit.contain, child: Text(widget.index.toString())),
     );
   }
 }
