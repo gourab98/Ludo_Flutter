@@ -7,6 +7,7 @@ import 'dart:math';
 
 import 'package:ludo/ludo_piece.dart';
 import 'package:ludo/ludo_quarter_painter.dart';
+import 'package:ludo/tile.dart';
 
 class LudoBoard extends StatefulWidget {
   final String colorName;
@@ -60,6 +61,8 @@ class _LudoBoardState extends State<LudoBoard> {
   // All Four(4) Stars List:
   List allStar = [91, 23, 133, 201];
 
+  //Green Piece
+  int g1 = 0;
   List greenPiecePath = [
     91,
     92,
@@ -383,22 +386,9 @@ class _LudoBoardState extends State<LudoBoard> {
                                     Center(
                                       child: Tile(
                                         index: index,
-                                        accessedCell: greenPiecePath[3],
+                                        accessedCell: greenPiecePath[g1],
                                       ),
-                                    )
-
-                                    // greenPiecePath.map((e) => Tile(index: e)).toList(),
-                                    // greenPiecePath
-                                    //     .map((13) => Tile(
-                                    //           index: 13,
-                                    //         ))
-                                    //     .toList(),
-
-                                    // greenPiecePath.elementAt(13),
-                                    // Container(
-                                    //   child: greenPiecePath.elementAt(23),
-                                    //   color: Colors.amber,
-                                    // ),
+                                    ),
                                   ],
                                 );
                               },
@@ -582,6 +572,8 @@ class _LudoBoardState extends State<LudoBoard> {
               onTap: () {
                 setState(() {
                   number = dice.nextInt(6);
+                  //g1 experimental moves:
+                  g1 = number + g1 + 1;
                   // number = 5;
                   flag = flag % 4;
                   if (flag == 0) {
@@ -645,42 +637,6 @@ class _LudoBoardState extends State<LudoBoard> {
           ],
         ),
       ),
-    );
-  }
-}
-
-class Tile extends StatefulWidget {
-  Tile({
-    required this.index,
-    required this.accessedCell,
-    Key? key,
-  }) : super(key: key);
-
-  final int index;
-  final int accessedCell;
-
-  @override
-  State<Tile> createState() => _TileState();
-}
-
-class _TileState extends State<Tile> {
-  bool _isAccessed = false;
-
-  @override
-  Widget build(BuildContext context) {
-    if (widget.accessedCell == widget.index) {
-      _isAccessed = true;
-    }
-
-    return Container(
-      decoration: BoxDecoration(
-        //color: Colors.amber,
-        borderRadius: BorderRadius.circular(5),
-        border:
-            Border.all(color: _isAccessed ? Colors.blue : Colors.transparent),
-      ),
-      child:
-          FittedBox(fit: BoxFit.contain, child: Text(widget.index.toString())),
     );
   }
 }
