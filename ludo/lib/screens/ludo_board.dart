@@ -1,14 +1,14 @@
 import 'dart:ui';
 
 import 'package:flutter/material.dart';
-import 'package:ludo/anti_tile.dart';
+import 'package:ludo/widgets/anti_tile.dart';
 import 'package:ludo/widgets/cell_color_on_board.dart';
 import 'package:ludo/widgets/glowing_side.dart';
 import 'dart:math';
 
 import 'package:ludo/widgets/ludo_piece.dart';
-import 'package:ludo/ludo_quarter_painter.dart';
-import 'package:ludo/tile.dart';
+import 'package:ludo/widgets/ludo_quarter_painter.dart';
+import 'package:ludo/widgets/tile.dart';
 
 class LudoBoard extends StatefulWidget {
   final String colorName;
