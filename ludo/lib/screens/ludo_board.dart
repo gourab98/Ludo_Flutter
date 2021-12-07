@@ -65,7 +65,7 @@ class _LudoBoardState extends State<LudoBoard> {
   List allStar = [91, 23, 133, 201];
 
   //Green Pieces:
-  int g1 = 0;
+  int g1 = 1;
   int g1Clear = 0;
   int g2 = 0;
   int g2Clear = 0;
@@ -81,6 +81,7 @@ class _LudoBoardState extends State<LudoBoard> {
 
   // All  Pieces Path:
   List greenPiecePath = [
+    16,
     91,
     92,
     93,
@@ -454,11 +455,41 @@ class _LudoBoardState extends State<LudoBoard> {
                                             )
                                           : Container(),
                                     ),
+                                    // RawMaterialButton(
+                                    //   onPressed: () {
+                                    //     setState(() {
+                                    //       if (g1 + number + 1 <= 56) {
+                                    //         g1Clear = g1;
+                                    //         g1 = number + g1 + 1;
+                                    //         number = 0;
+                                    //       }
+                                    //       print("Print you!!!");
+                                    //     });
+                                    //   },
+                                    //   child: Center(
+                                    //     child: Tile(
+                                    //       pieceName: 'g1',
+                                    //       diceValue: number,
+                                    //       index: index,
+                                    //       color: Colors.green,
+                                    //       pieceSize: pieceSize,
+                                    //       accessedCell: greenPiecePath[g1],
+                                    //     ),
+                                    //   ),
+                                    // ),
                                     Center(
                                       child: Tile(
+                                        pieceName: 'g1',
+                                        diceValue: number,
                                         index: index,
                                         color: Colors.green,
+                                        pieceSize: pieceSize,
                                         accessedCell: greenPiecePath[g1],
+                                        child: RawMaterialButton(
+                                          onPressed: () {
+                                            print("I am being pressed");
+                                          },
+                                        ),
                                       ),
                                     ),
                                     Center(
@@ -467,27 +498,36 @@ class _LudoBoardState extends State<LudoBoard> {
                                         accessedCell: greenPiecePath[g1Clear],
                                       ),
                                     ),
-                                    Center(
-                                      child: Tile(
-                                        index: index,
-                                        color: Colors.yellow,
-                                        accessedCell: yellowPiecePath[y1],
-                                      ),
-                                    ),
-                                    Center(
-                                      child: Tile(
-                                        index: index,
-                                        color: Colors.blue,
-                                        accessedCell: bluePiecePath[b1],
-                                      ),
-                                    ),
-                                    Center(
-                                      child: Tile(
-                                        index: index,
-                                        color: Colors.red,
-                                        accessedCell: redPiecePath[r1],
-                                      ),
-                                    ),
+                                    // Center(
+                                    //   child: Tile(
+                                    //     pieceName: 'y1',
+                                    //     diceValue: number,
+                                    //     index: index,
+                                    //     color: Colors.yellow,
+                                    //     pieceSize: pieceSize,
+                                    //     accessedCell: yellowPiecePath[y1],
+                                    //   ),
+                                    // ),
+                                    // Center(
+                                    //   child: Tile(
+                                    //     pieceName: 'b1',
+                                    //     diceValue: number,
+                                    //     index: index,
+                                    //     color: Colors.blue,
+                                    //     pieceSize: pieceSize,
+                                    //     accessedCell: bluePiecePath[b1],
+                                    //   ),
+                                    // ),
+                                    // Center(
+                                    //   child: Tile(
+                                    //     pieceName: 'r1',
+                                    //     diceValue: number,
+                                    //     index: index,
+                                    //     color: Colors.red,
+                                    //     pieceSize: pieceSize,
+                                    //     accessedCell: redPiecePath[r1],
+                                    //   ),
+                                    // ),
                                   ],
                                 );
                               },
@@ -667,15 +707,21 @@ class _LudoBoardState extends State<LudoBoard> {
                 );
               },
             ),
+            Center(
+                child: Text(
+              "Dice Number: ${number + 1}",
+              style: TextStyle(fontSize: 25),
+            )),
             GestureDetector(
               onTap: () {
+                // print("Dice is rolling");
                 setState(() {
                   number = dice.nextInt(6);
                   //g1 experimental moves:
-                  if (g1 + number + 1 <= 56) {
-                    g1Clear = g1;
-                    g1 = number + g1 + 1;
-                  }
+                  // if (g1 + number + 1 <= 56) {
+                  //   g1Clear = g1;
+                  //   g1 = number + g1 + 1;
+                  // }
                   // number = 5;
 //                  flag = flag % 4;
                   if (flag == 0) {
@@ -690,16 +736,16 @@ class _LudoBoardState extends State<LudoBoard> {
 
                   if (number == 5 && threeSix != 2) {
                     threeSix++;
-                    if (flag == 0) {
+                    if (flag == 0 && greenPiece['g1'] != true) {
                       greenPiece['g1'] = true;
                     }
-                    if (flag == 1) {
+                    if (flag == 1 && yellowPiece['y1'] != true) {
                       yellowPiece['y1'] = true;
                     }
-                    if (flag == 2) {
+                    if (flag == 2 && bluePiece['b1'] != true) {
                       bluePiece['b1'] = true;
                     }
-                    if (flag == 3) {
+                    if (flag == 3 && redPiece['r1'] != true) {
                       redPiece['r1'] = true;
                     }
                   } else {
