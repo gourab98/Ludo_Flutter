@@ -455,43 +455,39 @@ class _LudoBoardState extends State<LudoBoard> {
                                             )
                                           : Container(),
                                     ),
-                                    // RawMaterialButton(
-                                    //   onPressed: () {
-                                    //     setState(() {
-                                    //       if (g1 + number + 1 <= 56) {
-                                    //         g1Clear = g1;
-                                    //         g1 = number + g1 + 1;
-                                    //         number = 0;
-                                    //       }
-                                    //       print("Print you!!!");
-                                    //     });
-                                    //   },
-                                    //   child: Center(
-                                    //     child: Tile(
-                                    //       pieceName: 'g1',
-                                    //       diceValue: number,
-                                    //       index: index,
-                                    //       color: Colors.green,
-                                    //       pieceSize: pieceSize,
-                                    //       accessedCell: greenPiecePath[g1],
-                                    //     ),
-                                    //   ),
-                                    // ),
-                                    Center(
-                                      child: Tile(
-                                        pieceName: 'g1',
-                                        diceValue: number,
-                                        index: index,
-                                        color: Colors.green,
-                                        pieceSize: pieceSize,
-                                        accessedCell: greenPiecePath[g1],
-                                        child: RawMaterialButton(
-                                          onPressed: () {
-                                            print("I am being pressed");
-                                          },
+                                    GestureDetector(
+                                      onTap: () {
+                                        print("Detecting Tab");
+                                        setState(() {
+                                          if (g1 + number + 1 <= 56) {
+                                            g1Clear = g1;
+                                            g1 = number + g1 + 1;
+                                            number = 0;
+                                          }
+                                          print("Print you!!!");
+                                        });
+                                      },
+                                      child: Center(
+                                        child: Tile(
+                                          pieceName: 'g1',
+                                          diceValue: number,
+                                          index: index,
+                                          color: Colors.green,
+                                          pieceSize: pieceSize,
+                                          accessedCell: greenPiecePath[g1],
                                         ),
                                       ),
                                     ),
+                                    // Center(
+                                    //   child: Tile(
+                                    //     pieceName: 'g1',
+                                    //     diceValue: number,
+                                    //     index: index,
+                                    //     color: Colors.green,
+                                    //     pieceSize: pieceSize,
+                                    //     accessedCell: greenPiecePath[g1],
+                                    //   ),
+                                    // ),
                                     Center(
                                       child: AntiTile(
                                         index: index,

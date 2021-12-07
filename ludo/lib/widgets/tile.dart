@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 
 class Tile extends StatefulWidget {
   Tile({
-    required this.child,
     required this.diceValue,
     required this.pieceSize,
     required this.pieceName,
@@ -12,7 +11,6 @@ class Tile extends StatefulWidget {
     Key? key,
   }) : super(key: key);
 
-  Widget child;
   final String pieceName;
   final int index;
   final double pieceSize;
@@ -58,7 +56,6 @@ class _TileState extends State<Tile> {
       //         },
       //       )
       //     : null,
-      child: widget.child,
       height: widget.pieceSize,
       width: widget.pieceSize,
       decoration: BoxDecoration(
