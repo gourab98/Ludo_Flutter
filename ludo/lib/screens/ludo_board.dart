@@ -25,9 +25,11 @@ class LudoBoard extends StatefulWidget {
 
 class _LudoBoardState extends State<LudoBoard> {
   var dice = Random();
-  int number = 1;
+  int number = 0;
   int flag = 0;
   int threeSix = 0;
+
+  // All Pieces Value:
   Map<String, bool> greenPiece = {
     'g1': false,
     'g2': false,
@@ -62,12 +64,22 @@ class _LudoBoardState extends State<LudoBoard> {
   // All Four(4) Stars List:
   List allStar = [91, 23, 133, 201];
 
-  //All Piecess
+  //Green Pieces:
   int g1 = 0;
   int g1Clear = 0;
+  int g2 = 0;
+  int g2Clear = 0;
+  int g3 = 0;
+  int g3Clear = 0;
+  int g4 = 0;
+  int g4Clear = 0;
+
+  // Rest of the pieces:
   int y1 = 0;
   int b1 = 0;
   int r1 = 0;
+
+  // All  Pieces Path:
   List greenPiecePath = [
     91,
     92,
@@ -379,6 +391,7 @@ class _LudoBoardState extends State<LudoBoard> {
                       aspectRatio: 1,
                       child: Stack(
                         children: <Widget>[
+                          // Creating Cells using grid:
                           GridView.count(
                             crossAxisCount: 15,
                             childAspectRatio: 1,
@@ -402,9 +415,11 @@ class _LudoBoardState extends State<LudoBoard> {
                                       child: Text(
                                         "$index",
                                         style: TextStyle(
-                                            fontWeight: FontWeight.bold),
+                                          fontWeight: FontWeight.bold,
+                                        ),
                                       ),
                                     ),
+                                    // Making  color on the board like individual green cell color:
                                     CellColorOnBoard(
                                         CellColorOnBoard: greenCellColorOnBoard,
                                         color: Colors.green.shade200,
