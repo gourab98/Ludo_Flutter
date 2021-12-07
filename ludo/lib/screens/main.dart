@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:ludo/ludo_board.dart';
+import 'package:ludo/screens/ludo_board.dart';
 
 void main() {
   runApp(const MyApp());
