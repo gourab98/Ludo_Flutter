@@ -943,7 +943,6 @@ class _LudoBoardState extends State<LudoBoard> {
               },
               child: AvatarGlow(
                 endRadius: 100,
-                duration: Duration(milliseconds: 100),
                 glowColor: color,
                 child: Container(
                   alignment: Alignment.topCenter,
