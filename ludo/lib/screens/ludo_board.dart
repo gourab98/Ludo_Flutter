@@ -2,6 +2,7 @@ import 'dart:ui';
 
 import 'package:flutter/material.dart';
 import 'package:ludo/widgets/anti_tile.dart';
+import 'package:ludo/widgets/board_quarter_color.dart';
 import 'package:ludo/widgets/cell_color_on_board.dart';
 import 'package:ludo/widgets/glowing_side.dart';
 import 'dart:math';
@@ -63,15 +64,166 @@ class _LudoBoardState extends State<LudoBoard> {
   List finalCellColorOnBoard = [96, 97, 98, 111, 112, 113, 126, 127, 128];
   // All Four(4) Stars List:
   List allStar = [91, 23, 133, 201];
+  //Board Colors per quarter:
+  List greenBoard = [
+    0,
+    1,
+    2,
+    3,
+    4,
+    5,
+    15,
+    17,
+    18,
+    20,
+    30,
+    31,
+    32,
+    33,
+    34,
+    35,
+    45,
+    46,
+    47,
+    48,
+    49,
+    50,
+    60,
+    62,
+    63,
+    65,
+    75,
+    76,
+    77,
+    78,
+    79,
+    80
+  ];
+
+  List yellowBoard = [
+    9,
+    10,
+    11,
+    12,
+    13,
+    14,
+    24,
+    25,
+    26,
+    27,
+    28,
+    29,
+    39,
+    40,
+    41,
+    42,
+    43,
+    44,
+    54,
+    55,
+    56,
+    57,
+    58,
+    59,
+    69,
+    70,
+    71,
+    72,
+    73,
+    74,
+    84,
+    85,
+    86,
+    87,
+    87,
+    88,
+    89
+  ];
+  List blueBoard = [
+    144,
+    145,
+    146,
+    147,
+    148,
+    149,
+    159,
+    160,
+    161,
+    162,
+    163,
+    164,
+    174,
+    175,
+    176,
+    177,
+    178,
+    179,
+    189,
+    190,
+    191,
+    192,
+    193,
+    194,
+    204,
+    205,
+    206,
+    207,
+    208,
+    209,
+    219,
+    220,
+    221,
+    222,
+    223,
+    224
+  ];
+  List redBoard = [
+    135,
+    136,
+    137,
+    138,
+    139,
+    140,
+    150,
+    151,
+    152,
+    153,
+    154,
+    155,
+    165,
+    166,
+    167,
+    168,
+    169,
+    170,
+    180,
+    181,
+    182,
+    183,
+    184,
+    185,
+    195,
+    196,
+    197,
+    198,
+    199,
+    200,
+    210,
+    211,
+    212,
+    213,
+    214,
+    215
+  ];
 
   //Green Pieces:
   int g1 = 1;
   int g1Clear = 0;
-  int g2 = 0;
+  int g2 = 2;
   int g2Clear = 0;
-  int g3 = 0;
+  int g3 = 3;
   int g3Clear = 0;
-  int g4 = 0;
+  int g4 = 4;
   int g4Clear = 0;
 
   // Rest of the pieces:
@@ -81,7 +233,11 @@ class _LudoBoardState extends State<LudoBoard> {
 
   // All  Pieces Path:
   List greenPiecePath = [
+    112,
     16,
+    19,
+    61,
+    64,
     91,
     92,
     93,
@@ -390,313 +546,296 @@ class _LudoBoardState extends State<LudoBoard> {
                     padding: EdgeInsets.only(top: 10.0),
                     child: AspectRatio(
                       aspectRatio: 1,
-                      child: Stack(
-                        children: <Widget>[
-                          // Creating Cells using grid:
-                          GridView.count(
-                            crossAxisCount: 15,
-                            childAspectRatio: 1,
-                            children: List<Widget>.generate(
-                              225,
-                              (index) {
-                                return Stack(
-                                  children: [
-                                    GridTile(
-                                      child: Container(
-                                        decoration: BoxDecoration(
-                                          color: Colors.white,
-                                          borderRadius:
-                                              BorderRadius.circular(5),
-                                          border:
-                                              Border.all(color: Colors.black),
+                      child: GridView.count(
+                        crossAxisCount: 15,
+                        childAspectRatio: 1,
+                        children: List<Widget>.generate(
+                          225,
+                          (index) {
+                            return Stack(
+                              children: [
+                                GridTile(
+                                  child: Container(
+                                    decoration: BoxDecoration(
+                                      color: Colors.white,
+                                      borderRadius: BorderRadius.circular(5),
+                                      border: Border.all(color: Colors.black),
+                                    ),
+                                  ),
+                                ),
+                                // Center(
+                                //   child: Text(
+                                //     "$index",
+                                //     style: TextStyle(
+                                //       fontWeight: FontWeight.bold,
+                                //     ),
+                                //   ),
+                                // ),
+                                //Board Color
+                                BoardQuarterColor(
+                                    CellColorOnBoard: greenBoard,
+                                    color: Colors.green.shade900,
+                                    index: index),
+                                BoardQuarterColor(
+                                    CellColorOnBoard: yellowBoard,
+                                    color: Colors.yellow.shade900,
+                                    index: index),
+                                BoardQuarterColor(
+                                    CellColorOnBoard: blueBoard,
+                                    color: Colors.blue.shade900,
+                                    index: index),
+                                BoardQuarterColor(
+                                    CellColorOnBoard: redBoard,
+                                    color: Colors.red.shade900,
+                                    index: index),
+                                // Making  color on the board like individual green cell color:
+                                CellColorOnBoard(
+                                    CellColorOnBoard: greenCellColorOnBoard,
+                                    color: Colors.green.shade200,
+                                    index: index),
+                                CellColorOnBoard(
+                                    CellColorOnBoard: yellowCellColorOnBoard,
+                                    color: Colors.yellow.shade200,
+                                    index: index),
+                                CellColorOnBoard(
+                                    CellColorOnBoard: blueCellColorOnBoard,
+                                    color: Colors.blue.shade200,
+                                    index: index),
+                                CellColorOnBoard(
+                                    CellColorOnBoard: redCellColorOnBoard,
+                                    color: Colors.red.shade200,
+                                    index: index),
+                                CellColorOnBoard(
+                                    CellColorOnBoard: finalCellColorOnBoard,
+                                    color: Colors.indigo.shade200,
+                                    index: index),
+
+                                // Green g1
+                                if (greenPiece['g1'] == true)
+                                  Center(
+                                    child: Tile(
+                                      pieceName: 'g1',
+                                      diceValue: number,
+                                      index: index,
+                                      color: Colors.green,
+                                      pieceSize: pieceSize,
+                                      accessedCell: greenPiecePath[g1],
+                                      child: InkWell(
+//                                        behavior: HitTestBehavior.translucent,
+                                        onTap: () {
+                                          print("'g1' is pressed $g1");
+                                          setState(() {
+                                            if (g1 == 1) {
+                                              g1 = 5;
+                                            }
+                                            if (g1 + number <= 61) {
+                                              g1Clear = g1;
+                                              g1 = number + g1;
+                                              number = 0;
+                                            }
+                                          });
+                                        },
+                                        child: Center(
+                                          child: Text("g1",
+                                              style: TextStyle(
+                                                fontWeight: FontWeight.bold,
+                                                fontSize: 18,
+                                                color: Colors.white,
+                                              )),
                                         ),
                                       ),
                                     ),
-                                    Center(
-                                      child: Text(
-                                        "$index",
-                                        style: TextStyle(
-                                          fontWeight: FontWeight.bold,
+                                  ),
+                                // IgnorePointer(
+                                //   child: Center(
+                                //     child: AntiTile(
+                                //       index: index,
+                                //       accessedCell: greenPiecePath[g1Clear],
+                                //     ),
+                                //   ),
+                                // ),
+                                // Green g2
+                                if (greenPiece['g2'] == true)
+                                  Center(
+                                    child: Tile(
+                                      pieceName: 'g2',
+                                      diceValue: number,
+                                      index: index,
+                                      color: Colors.green,
+                                      pieceSize: pieceSize,
+                                      accessedCell: greenPiecePath[g2],
+                                      child: InkWell(
+//                                        behavior: HitTestBehavior.translucent,
+                                        onTap: () {
+                                          print("'g2' is pressed $g2");
+                                          setState(() {
+                                            if (g2 == 2) {
+                                              g2 = 5;
+                                            }
+                                            if (g2 + number <= 61) {
+                                              g2Clear = g2;
+                                              g2 = number + g2;
+                                              number = 0;
+                                            }
+                                          });
+                                        },
+                                        child: Center(
+                                          child: Text("g2",
+                                              style: TextStyle(
+                                                fontWeight: FontWeight.bold,
+                                                fontSize: 18,
+                                                color: Colors.white,
+                                              )),
                                         ),
                                       ),
                                     ),
-                                    // Making  color on the board like individual green cell color:
-                                    CellColorOnBoard(
-                                        CellColorOnBoard: greenCellColorOnBoard,
-                                        color: Colors.green.shade200,
-                                        index: index),
-                                    CellColorOnBoard(
-                                        CellColorOnBoard:
-                                            yellowCellColorOnBoard,
-                                        color: Colors.yellow.shade200,
-                                        index: index),
-                                    CellColorOnBoard(
-                                        CellColorOnBoard: blueCellColorOnBoard,
-                                        color: Colors.blue.shade200,
-                                        index: index),
-                                    CellColorOnBoard(
-                                        CellColorOnBoard: redCellColorOnBoard,
-                                        color: Colors.red.shade200,
-                                        index: index),
-                                    CellColorOnBoard(
-                                        CellColorOnBoard: finalCellColorOnBoard,
-                                        color: Colors.indigo.shade200,
-                                        index: index),
-                                    Center(
-                                      child: allStar.contains(index)
-                                          ? Container(
-                                              child: Center(
-                                                child: Icon(
-                                                  Icons.star,
-                                                  size: pieceSize,
-                                                  color: Colors.black54,
-                                                ),
+                                  ),
+                                // IgnorePointer(
+                                //   child: Center(
+                                //     child: AntiTile(
+                                //       index: index,
+                                //       accessedCell: greenPiecePath[g2Clear],
+                                //     ),
+                                //   ),
+                                // ),
+                                // Green g3
+                                if (greenPiece['g3'] == true)
+                                  Center(
+                                    child: Tile(
+                                      pieceName: 'g3',
+                                      diceValue: number,
+                                      index: index,
+                                      color: Colors.green,
+                                      pieceSize: pieceSize,
+                                      accessedCell: greenPiecePath[g3],
+                                      child: InkWell(
+//                                        behavior: HitTestBehavior.translucent,
+                                        onTap: () {
+                                          print("'g3' is pressed $g3");
+                                          setState(() {
+                                            if (g3 == 3) {
+                                              g3 = 5;
+                                            }
+                                            if (g3 + number <= 61) {
+                                              g3Clear = g3;
+                                              g3 = number + g3;
+                                              number = 0;
+                                            }
+                                          });
+                                        },
+                                        child: Center(
+                                          child: Text("g3",
+                                              style: TextStyle(
+                                                fontWeight: FontWeight.bold,
+                                                fontSize: 18,
+                                                color: Colors.white,
+                                              )),
+                                        ),
+                                      ),
+                                    ),
+                                  ),
+                                // IgnorePointer(
+                                //   child: Center(
+                                //     child: AntiTile(
+                                //       index: index,
+                                //       accessedCell: greenPiecePath[g3Clear],
+                                //     ),
+                                //   ),
+                                // ),
+                                // Green g2
+                                if (greenPiece['g4'] == true)
+                                  Center(
+                                    child: Tile(
+                                      pieceName: 'g4',
+                                      diceValue: number,
+                                      index: index,
+                                      color: Colors.green,
+                                      pieceSize: pieceSize,
+                                      accessedCell: greenPiecePath[g4],
+                                      child: InkWell(
+//                                        behavior: HitTestBehavior.translucent,
+                                        onTap: () {
+                                          print("'g4' is pressed $g4");
+                                          setState(() {
+                                            if (g4 == 4) {
+                                              g4 = 5;
+                                            }
+                                            if (g4 + number <= 61) {
+                                              g4Clear = g4;
+                                              g4 = number + g4;
+                                              number = 0;
+                                            }
+                                          });
+                                        },
+                                        child: Center(
+                                          child: Text("g4",
+                                              style: TextStyle(
+                                                fontWeight: FontWeight.bold,
+                                                fontSize: 18,
+                                                color: Colors.white,
+                                              )),
+                                        ),
+                                      ),
+                                    ),
+                                  ),
+                                // IgnorePointer(
+                                //   child: Center(
+                                //     child: AntiTile(
+                                //       index: index,
+                                //       accessedCell: greenPiecePath[g4Clear],
+                                //     ),
+                                //   ),
+                                // ),
+                                // Center(
+                                //   child: Tile(
+                                //     pieceName: 'y1',
+                                //     diceValue: number,
+                                //     index: index,
+                                //     color: Colors.yellow,
+                                //     pieceSize: pieceSize,
+                                //     accessedCell: yellowPiecePath[y1],
+                                //   ),
+                                // ),
+                                // Center(
+                                //   child: Tile(
+                                //     pieceName: 'b1',
+                                //     diceValue: number,
+                                //     index: index,
+                                //     color: Colors.blue,
+                                //     pieceSize: pieceSize,
+                                //     accessedCell: bluePiecePath[b1],
+                                //   ),
+                                // ),
+                                // Center(
+                                //   child: Tile(
+                                //     pieceName: 'r1',
+                                //     diceValue: number,
+                                //     index: index,
+                                //     color: Colors.red,
+                                //     pieceSize: pieceSize,
+                                //     accessedCell: redPiecePath[r1],
+                                //   ),
+                                // ),
+                                // All Stars
+                                IgnorePointer(
+                                  child: Center(
+                                    child: allStar.contains(index)
+                                        ? Container(
+                                            child: Center(
+                                              child: Icon(
+                                                Icons.star,
+                                                size: pieceSize,
+                                                color: Colors.black54,
                                               ),
-                                            )
-                                          : Container(),
-                                    ),
-                                    GestureDetector(
-                                      onTap: () {
-                                        print("Detecting Tab");
-                                        setState(() {
-                                          if (g1 + number + 1 <= 56) {
-                                            g1Clear = g1;
-                                            g1 = number + g1 + 1;
-                                            number = 0;
-                                          }
-                                          print("Print you!!!");
-                                        });
-                                      },
-                                      child: Center(
-                                        child: Tile(
-                                          pieceName: 'g1',
-                                          diceValue: number,
-                                          index: index,
-                                          color: Colors.green,
-                                          pieceSize: pieceSize,
-                                          accessedCell: greenPiecePath[g1],
-                                        ),
-                                      ),
-                                    ),
-                                    // Center(
-                                    //   child: Tile(
-                                    //     pieceName: 'g1',
-                                    //     diceValue: number,
-                                    //     index: index,
-                                    //     color: Colors.green,
-                                    //     pieceSize: pieceSize,
-                                    //     accessedCell: greenPiecePath[g1],
-                                    //   ),
-                                    // ),
-                                    Center(
-                                      child: AntiTile(
-                                        index: index,
-                                        accessedCell: greenPiecePath[g1Clear],
-                                      ),
-                                    ),
-                                    // Center(
-                                    //   child: Tile(
-                                    //     pieceName: 'y1',
-                                    //     diceValue: number,
-                                    //     index: index,
-                                    //     color: Colors.yellow,
-                                    //     pieceSize: pieceSize,
-                                    //     accessedCell: yellowPiecePath[y1],
-                                    //   ),
-                                    // ),
-                                    // Center(
-                                    //   child: Tile(
-                                    //     pieceName: 'b1',
-                                    //     diceValue: number,
-                                    //     index: index,
-                                    //     color: Colors.blue,
-                                    //     pieceSize: pieceSize,
-                                    //     accessedCell: bluePiecePath[b1],
-                                    //   ),
-                                    // ),
-                                    // Center(
-                                    //   child: Tile(
-                                    //     pieceName: 'r1',
-                                    //     diceValue: number,
-                                    //     index: index,
-                                    //     color: Colors.red,
-                                    //     pieceSize: pieceSize,
-                                    //     accessedCell: redPiecePath[r1],
-                                    //   ),
-                                    // ),
-                                  ],
-                                );
-                              },
-                            ),
-                          ),
-                          if (flag == 0)
-                            Glowing(
-                              color: Colors.green.shade600,
-                              offset: Offset(-250, -250),
-                              blurRadius: 150,
-                              spreadRadius: -30,
-                            ),
-                          if (flag == 1)
-                            Glowing(
-                              color: Colors.yellow.shade600,
-                              offset: Offset(250, -250),
-                              blurRadius: 150,
-                              spreadRadius: -30,
-                            ),
-                          if (flag == 2)
-                            Glowing(
-                              color: Colors.blue.shade600,
-                              offset: Offset(150, 150),
-                              spreadRadius: -130,
-                              blurRadius: 150,
-                            ),
-
-                          if (flag == 3)
-                            Glowing(
-                              color: Colors.red.shade600,
-                              offset: Offset(-150, 150),
-                              blurRadius: 150,
-                              spreadRadius: -130,
-                            ),
-                          // LeftUp Board Color(Green)
-                          CustomPaint(
-                            size: Size(sizeHeight, sizeWeight),
-                            painter: MyPainter(
-                                left: 0.0,
-                                top: 0.0,
-                                right: (size.height) * 6 / 15,
-                                bottom: (size.height) * 6 / 15,
-                                color: Colors.green.shade800),
-                          ),
-
-                          if (greenPiece['g1'] == true)
-                            ludoPiece(
-                                left: boardSize * (1 / 15),
-                                top: boardSize * (1 / 15),
-                                pieceSize: pieceSize,
-                                color: Colors.green.shade300),
-                          if (greenPiece['g2'] == true)
-                            ludoPiece(
-                                left: boardSize * (4 / 15),
-                                top: boardSize * (1 / 15),
-                                pieceSize: pieceSize,
-                                color: Colors.green.shade300),
-                          if (greenPiece['g3'] == true)
-                            ludoPiece(
-                                left: boardSize * (1 / 15),
-                                top: boardSize * (4 / 15),
-                                pieceSize: pieceSize,
-                                color: Colors.green.shade300),
-                          if (greenPiece['g4'] == true)
-                            ludoPiece(
-                                left: boardSize * (4 / 15),
-                                top: boardSize * (4 / 15),
-                                pieceSize: pieceSize,
-                                color: Colors.green.shade300),
-                          //RightUp Board Color(Yellow)
-                          CustomPaint(
-                            size: Size(sizeHeight, sizeWeight),
-                            painter: MyPainter(
-                                left: (size.height) * 9 / 15,
-                                top: 0.0,
-                                right: size.height,
-                                bottom: (size.height) * 6 / 15,
-                                color: Colors.yellow.shade800),
-                          ),
-                          if (yellowPiece['y1'] == true)
-                            ludoPiece(
-                                left: boardSize * (10 / 15),
-                                top: boardSize * (1 / 15),
-                                pieceSize: pieceSize,
-                                color: Colors.yellow.shade300),
-                          if (yellowPiece['y2'] == true)
-                            ludoPiece(
-                                left: boardSize * (13 / 15),
-                                top: boardSize * (1 / 15),
-                                pieceSize: pieceSize,
-                                color: Colors.yellow.shade300),
-                          if (yellowPiece['y3'] == true)
-                            ludoPiece(
-                                left: boardSize * (10 / 15),
-                                top: boardSize * (4 / 15),
-                                pieceSize: pieceSize,
-                                color: Colors.yellow.shade300),
-                          if (yellowPiece['y4'] == true)
-                            ludoPiece(
-                                left: boardSize * (13 / 15),
-                                top: boardSize * (4 / 15),
-                                pieceSize: pieceSize,
-                                color: Colors.yellow.shade300),
-                          //LeftDown Board Color(Red)
-                          CustomPaint(
-                            size: Size(sizeHeight, sizeWeight),
-                            painter: MyPainter(
-                                left: 0.0,
-                                top: (size.height) * 9 / 15,
-                                right: (size.height) * 6 / 15,
-                                bottom: size.height,
-                                color: Colors.red.shade800),
-                          ),
-                          if (bluePiece['b1'] == true)
-                            ludoPiece(
-                                left: boardSize * (1 / 15),
-                                top: boardSize * (10 / 15),
-                                pieceSize: pieceSize,
-                                color: Colors.red.shade300),
-                          if (bluePiece['b2'] == true)
-                            ludoPiece(
-                                left: boardSize * (4 / 15),
-                                top: boardSize * (10 / 15),
-                                pieceSize: pieceSize,
-                                color: Colors.red.shade300),
-                          if (bluePiece['b3'] == true)
-                            ludoPiece(
-                                left: boardSize * (1 / 15),
-                                top: boardSize * (13 / 15),
-                                pieceSize: pieceSize,
-                                color: Colors.red.shade300),
-                          if (bluePiece['b4'] == true)
-                            ludoPiece(
-                                left: boardSize * (4 / 15),
-                                top: boardSize * (13 / 15),
-                                pieceSize: pieceSize,
-                                color: Colors.red.shade300),
-                          // RightDown Board Color(Blue):
-                          CustomPaint(
-                            size: Size(sizeHeight, sizeWeight),
-                            painter: MyPainter(
-                              left: (size.height) * 9 / 15,
-                              top: (size.height) * 9 / 15,
-                              right: size.height,
-                              bottom: size.height,
-                              color: Colors.blue.shade800,
-                            ),
-                          ),
-                          if (redPiece['r1'] == true)
-                            ludoPiece(
-                                left: boardSize * (10 / 15),
-                                top: boardSize * (10 / 15),
-                                pieceSize: pieceSize,
-                                color: Colors.blue.shade300),
-                          if (redPiece['r2'] == true)
-                            ludoPiece(
-                                left: boardSize * (13 / 15),
-                                top: boardSize * (10 / 15),
-                                pieceSize: pieceSize,
-                                color: Colors.blue.shade300),
-                          if (redPiece['r3'] == true)
-                            ludoPiece(
-                                left: boardSize * (10 / 15),
-                                top: boardSize * (13 / 15),
-                                pieceSize: pieceSize,
-                                color: Colors.blue.shade300),
-                          if (redPiece['r4'] == true)
-                            ludoPiece(
-                                left: boardSize * (13 / 15),
-                                top: boardSize * (13 / 15),
-                                pieceSize: pieceSize,
-                                color: Colors.blue.shade300),
-                        ],
+                                            ),
+                                          )
+                                        : Container(),
+                                  ),
+                                ),
+                              ],
+                            );
+                          },
+                        ),
                       ),
                     ),
                   ),
@@ -705,14 +844,14 @@ class _LudoBoardState extends State<LudoBoard> {
             ),
             Center(
                 child: Text(
-              "Dice Number: ${number + 1}",
+              "Flag -> $flag Dice Number: ${number}",
               style: TextStyle(fontSize: 25),
             )),
             GestureDetector(
               onTap: () {
                 // print("Dice is rolling");
                 setState(() {
-                  number = dice.nextInt(6);
+                  number = dice.nextInt(6) + 1;
                   //g1 experimental moves:
                   // if (g1 + number + 1 <= 56) {
                   //   g1Clear = g1;
@@ -721,32 +860,56 @@ class _LudoBoardState extends State<LudoBoard> {
                   // number = 5;
 //                  flag = flag % 4;
                   if (flag == 0) {
-                    print("Flag is $flag = Green value =${number + 1}");
+                    print("Flag is $flag = Green value =${number}");
                   } else if (flag == 1) {
-                    print("Flag is $flag = Yellow value =${number + 1}");
+                    print("Flag is $flag = Yellow value =${number}");
                   } else if (flag == 2) {
-                    print("Flag is $flag = Blue value =${number + 1}");
+                    print("Flag is $flag = Blue value =${number}");
                   } else if (flag == 3) {
-                    print("Flag is $flag = Red value =${number + 1}");
+                    print("Flag is $flag = Red value =${number}");
                   }
 
-                  if (number == 5 && threeSix != 2) {
+                  if (number == 6 && threeSix != 2) {
                     threeSix++;
                     if (flag == 0 && greenPiece['g1'] != true) {
                       greenPiece['g1'] = true;
+                      number = 0;
+                    } else if (flag == 0 &&
+                        greenPiece['g1'] == true &&
+                        greenPiece['g2'] != true) {
+                      greenPiece['g2'] = true;
+                      number = 0;
+                    } else if (flag == 0 &&
+                        greenPiece['g1'] == true &&
+                        greenPiece['g2'] == true &&
+                        greenPiece['g3'] != true) {
+                      greenPiece['g3'] = true;
+                      number = 0;
+                    } else if (flag == 0 &&
+                        greenPiece['g1'] == true &&
+                        greenPiece['g2'] == true &&
+                        greenPiece['g3'] == true &&
+                        greenPiece['g4'] != true) {
+                      greenPiece['g4'] = true;
+                      number = 0;
                     }
-                    if (flag == 1 && yellowPiece['y1'] != true) {
-                      yellowPiece['y1'] = true;
-                    }
-                    if (flag == 2 && bluePiece['b1'] != true) {
-                      bluePiece['b1'] = true;
-                    }
-                    if (flag == 3 && redPiece['r1'] != true) {
-                      redPiece['r1'] = true;
-                    }
+
+                    // if (flag == 1 && yellowPiece['y1'] != true) {
+                    //   yellowPiece['y1'] = true;
+                    //   number = 0;
+                    // }
+                    // if (flag == 2 && bluePiece['b1'] != true) {
+                    //   bluePiece['b1'] = true;
+                    //   number = 0;
+                    // }
+                    // if (flag == 3 && redPiece['r1'] != true) {
+                    //   redPiece['r1'] = true;
+                    //   number = 0;
+                    // }
                   } else {
                     flag++;
-                    if (flag >= 4) {
+                    // if (flag >= 4) {
+                    if (flag >= 1) {
                       flag = 0;
                     }
                     threeSix = 0;

@@ -8,6 +8,7 @@ class Tile extends StatefulWidget {
     required this.color,
     required this.index,
     required this.accessedCell,
+    required this.child,
     Key? key,
   }) : super(key: key);
 
@@ -17,7 +18,7 @@ class Tile extends StatefulWidget {
   final int accessedCell;
   final Color color;
   final int diceValue;
-
+  Widget child;
   @override
   State<Tile> createState() => _TileState();
 }
@@ -32,35 +33,12 @@ class _TileState extends State<Tile> {
     }
 
     return Container(
-      // child: _isAccessed
-      //     ? Center(
-      //         child: Text(widget.pieceName,
-      //             style: TextStyle(
-      //               fontWeight: FontWeight.bold,
-      //               fontSize: 18,
-      //               color: Colors.white,
-      //             )),
-      //       )
-      //     : Center(
-      //         child: Text(
-      //           "",
-      //           style: TextStyle(fontWeight: FontWeight.bold),
-      //         ),
-      //       ),
-      // child: _isAccessed
-      //     ? RawMaterialButton(
-      //         onPressed: () {
-      //           setState(() {
-      //             print("I am green and I am working.");
-      //           });
-      //         },
-      //       )
-      //     : null,
+      child: _isAccessed ? widget.child : null,
       height: widget.pieceSize,
       width: widget.pieceSize,
       decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(5),
-        color: _isAccessed ? widget.color : Colors.transparent,
+        borderRadius: BorderRadius.circular(500),
+        color: _isAccessed ? widget.color : null,
         //   border:
         //       Border.all(color: _isAccessed ? Colors.blue : Colors.transparent),
       ),

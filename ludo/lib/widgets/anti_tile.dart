@@ -29,12 +29,12 @@ class _AntiTileState extends State<AntiTile> {
         border: Border.all(color: Colors.black),
         color: _isAccessed ? Colors.white : Colors.transparent,
       ),
-      child: Center(
-        child: Text(
-          "${widget.index}",
-          style: TextStyle(fontWeight: FontWeight.bold),
-        ),
-      ),
+      // child: Center(
+      //   child: Text(
+      //     "${widget.index}",
+      //     style: TextStyle(fontWeight: FontWeight.bold),
+      //   ),
+      // ),
     );
   }
 }
