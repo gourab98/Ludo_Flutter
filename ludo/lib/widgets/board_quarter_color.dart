@@ -1,3 +1,4 @@
+import 'package:avatar_glow/avatar_glow.dart';
 import 'package:flutter/cupertino.dart';
 
 import 'package:flutter/material.dart';
@@ -11,10 +12,10 @@ Widget BoardQuarterColor(
         ? Container(
             child: Center(child: Text("$index")),
             decoration: BoxDecoration(
-//              border: Border.all(style: BorderStyle.none, color: Colors.white),
+              //              border: Border.all(style: BorderStyle.none, color: Colors.white),
               color: color,
               borderRadius: BorderRadius.zero,
-//              border: Border.all(color: Colors.black),
+              //              border: Border.all(color: Colors.black),
             ),
           )
         : Container(),

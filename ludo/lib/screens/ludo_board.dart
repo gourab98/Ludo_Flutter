@@ -1,5 +1,6 @@
 import 'dart:ui';
 
+import 'package:avatar_glow/avatar_glow.dart';
 import 'package:flutter/material.dart';
 import 'package:ludo/widgets/anti_tile.dart';
 import 'package:ludo/widgets/board_quarter_color.dart';
@@ -29,6 +30,7 @@ class _LudoBoardState extends State<LudoBoard> {
   int number = 0;
   int flag = 0;
   int threeSix = 0;
+  Color color = Colors.green;
 
   // All Pieces Value:
   Map<String, bool> greenPiece = {
@@ -628,8 +630,7 @@ class _LudoBoardState extends State<LudoBoard> {
                                             if (g1 == 1) {
                                               g1 = 5;
                                               g1Clear = 1;
-                                            }
-                                            if (g1 + number <= 61) {
+                                            } else if (g1 + number <= 61) {
                                               g1Clear = g1;
                                               g1 = number + g1;
                                               number = 0;
@@ -673,8 +674,7 @@ class _LudoBoardState extends State<LudoBoard> {
                                             if (g2 == 2) {
                                               g2 = 5;
                                               g2Clear = 2;
-                                            }
-                                            if (g2 + number <= 61) {
+                                            } else if (g2 + number <= 61) {
                                               g2Clear = g2;
                                               g2 = number + g2;
                                               number = 0;
@@ -718,8 +718,7 @@ class _LudoBoardState extends State<LudoBoard> {
                                             if (g3 == 3) {
                                               g3 = 5;
                                               g3Clear = 3;
-                                            }
-                                            if (g3 + number <= 61) {
+                                            } else if (g3 + number <= 61) {
                                               g3Clear = g3;
                                               g3 = number + g3;
                                               number = 0;
@@ -763,8 +762,7 @@ class _LudoBoardState extends State<LudoBoard> {
                                             if (g4 == 4) {
                                               g4 = 5;
                                               g4Clear = 4;
-                                            }
-                                            if (g4 + number <= 61) {
+                                            } else if (g4 + number <= 61) {
                                               g4Clear = g4;
                                               g4 = number + g4;
                                               number = 0;
@@ -864,12 +862,16 @@ class _LudoBoardState extends State<LudoBoard> {
                   // number = 5;
 //                  flag = flag % 4;
                   if (flag == 0) {
+                    color = Colors.yellow.shade900;
                     print("Flag is $flag = Green value =${number}");
                   } else if (flag == 1) {
+                    color = Colors.blue.shade900;
                     print("Flag is $flag = Yellow value =${number}");
                   } else if (flag == 2) {
+                    color = Colors.red.shade900;
                     print("Flag is $flag = Blue value =${number}");
                   } else if (flag == 3) {
+                    color = Colors.green.shade900;
                     print("Flag is $flag = Red value =${number}");
                   }
 
@@ -912,8 +914,8 @@ class _LudoBoardState extends State<LudoBoard> {
                     // }
                   } else {
                     flag++;
-                    // if (flag >= 4) {
-                    if (flag >= 1) {
+                    if (flag >= 4) {
+                      //if (flag >= 1) {
                       flag = 0;
                     }
                     threeSix = 0;
@@ -939,12 +941,17 @@ class _LudoBoardState extends State<LudoBoard> {
                   // }
                 });
               },
-              child: Container(
-                alignment: Alignment.topCenter,
-                child: Transform.scale(
-                  scale: .4,
-                  child: Image(
-                    image: AssetImage('assets/$number.png'),
+              child: AvatarGlow(
+                endRadius: 100,
+                duration: Duration(milliseconds: 100),
+                glowColor: color,
+                child: Container(
+                  alignment: Alignment.topCenter,
+                  child: Transform.scale(
+                    scale: .4,
+                    child: Image(
+                      image: AssetImage('assets/$number.png'),
+                    ),
                   ),
                 ),
               ),
