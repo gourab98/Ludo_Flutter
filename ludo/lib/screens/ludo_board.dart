@@ -627,6 +627,7 @@ class _LudoBoardState extends State<LudoBoard> {
                                           setState(() {
                                             if (g1 == 1) {
                                               g1 = 5;
+                                              g1Clear = 1;
                                             }
                                             if (g1 + number <= 61) {
                                               g1Clear = g1;
@@ -646,14 +647,14 @@ class _LudoBoardState extends State<LudoBoard> {
                                       ),
                                     ),
                                   ),
-                                // IgnorePointer(
-                                //   child: Center(
-                                //     child: AntiTile(
-                                //       index: index,
-                                //       accessedCell: greenPiecePath[g1Clear],
-                                //     ),
-                                //   ),
-                                // ),
+                                IgnorePointer(
+                                  child: Center(
+                                    child: AntiTile(
+                                      index: index,
+                                      accessedCell: greenPiecePath[g1Clear],
+                                    ),
+                                  ),
+                                ),
                                 // Green g2
                                 if (greenPiece['g2'] == true)
                                   Center(
@@ -671,6 +672,7 @@ class _LudoBoardState extends State<LudoBoard> {
                                           setState(() {
                                             if (g2 == 2) {
                                               g2 = 5;
+                                              g2Clear = 2;
                                             }
                                             if (g2 + number <= 61) {
                                               g2Clear = g2;
@@ -690,14 +692,14 @@ class _LudoBoardState extends State<LudoBoard> {
                                       ),
                                     ),
                                   ),
-                                // IgnorePointer(
-                                //   child: Center(
-                                //     child: AntiTile(
-                                //       index: index,
-                                //       accessedCell: greenPiecePath[g2Clear],
-                                //     ),
-                                //   ),
-                                // ),
+                                IgnorePointer(
+                                  child: Center(
+                                    child: AntiTile(
+                                      index: index,
+                                      accessedCell: greenPiecePath[g2Clear],
+                                    ),
+                                  ),
+                                ),
                                 // Green g3
                                 if (greenPiece['g3'] == true)
                                   Center(
@@ -715,6 +717,7 @@ class _LudoBoardState extends State<LudoBoard> {
                                           setState(() {
                                             if (g3 == 3) {
                                               g3 = 5;
+                                              g3Clear = 3;
                                             }
                                             if (g3 + number <= 61) {
                                               g3Clear = g3;
@@ -734,14 +737,14 @@ class _LudoBoardState extends State<LudoBoard> {
                                       ),
                                     ),
                                   ),
-                                // IgnorePointer(
-                                //   child: Center(
-                                //     child: AntiTile(
-                                //       index: index,
-                                //       accessedCell: greenPiecePath[g3Clear],
-                                //     ),
-                                //   ),
-                                // ),
+                                IgnorePointer(
+                                  child: Center(
+                                    child: AntiTile(
+                                      index: index,
+                                      accessedCell: greenPiecePath[g3Clear],
+                                    ),
+                                  ),
+                                ),
                                 // Green g2
                                 if (greenPiece['g4'] == true)
                                   Center(
@@ -759,6 +762,7 @@ class _LudoBoardState extends State<LudoBoard> {
                                           setState(() {
                                             if (g4 == 4) {
                                               g4 = 5;
+                                              g4Clear = 4;
                                             }
                                             if (g4 + number <= 61) {
                                               g4Clear = g4;
@@ -778,14 +782,14 @@ class _LudoBoardState extends State<LudoBoard> {
                                       ),
                                     ),
                                   ),
-                                // IgnorePointer(
-                                //   child: Center(
-                                //     child: AntiTile(
-                                //       index: index,
-                                //       accessedCell: greenPiecePath[g4Clear],
-                                //     ),
-                                //   ),
-                                // ),
+                                IgnorePointer(
+                                  child: Center(
+                                    child: AntiTile(
+                                      index: index,
+                                      accessedCell: greenPiecePath[g4Clear],
+                                    ),
+                                  ),
+                                ),
                                 // Center(
                                 //   child: Tile(
                                 //     pieceName: 'y1',
