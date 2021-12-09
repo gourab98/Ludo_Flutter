@@ -30,6 +30,7 @@ class _LudoBoardState extends State<LudoBoard> {
   int number = 0;
   int flag = 0;
   int threeSix = 0;
+  String diceValuePrint = "Nothing";
   Color color = Colors.green;
 
   // All Pieces Value:
@@ -846,7 +847,7 @@ class _LudoBoardState extends State<LudoBoard> {
             ),
             Center(
                 child: Text(
-              "Flag -> $flag Dice Number: ${number}",
+              "$diceValuePrint",
               style: TextStyle(fontSize: 25),
             )),
             GestureDetector(
@@ -861,19 +862,6 @@ class _LudoBoardState extends State<LudoBoard> {
                   // }
                   // number = 5;
 //                  flag = flag % 4;
-                  if (flag == 0) {
-                    color = Colors.yellow.shade900;
-                    print("Flag is $flag = Green value =${number}");
-                  } else if (flag == 1) {
-                    color = Colors.blue.shade900;
-                    print("Flag is $flag = Yellow value =${number}");
-                  } else if (flag == 2) {
-                    color = Colors.red.shade900;
-                    print("Flag is $flag = Blue value =${number}");
-                  } else if (flag == 3) {
-                    color = Colors.green.shade900;
-                    print("Flag is $flag = Red value =${number}");
-                  }
 
                   if (number == 6 && threeSix != 2) {
                     threeSix++;
@@ -920,6 +908,22 @@ class _LudoBoardState extends State<LudoBoard> {
                     }
                     threeSix = 0;
                   }
+                  if (flag == 0 && threeSix == 0) {
+                    color = Colors.yellow.shade900;
+                    print("Flag is $flag = Green value =${number}");
+                  } else if (flag == 1 && threeSix == 0) {
+                    color = Colors.blue.shade900;
+                    print("Flag is $flag = Yellow value =${number}");
+                  } else if (flag == 2 && threeSix == 0) {
+                    color = Colors.red.shade900;
+                    print("Flag is $flag = Blue value =${number}");
+                  } else if (flag == 3 && threeSix == 0) {
+                    color = Colors.green.shade900;
+                    print("Flag is $flag = Red value =${number}");
+                  }
+                  diceValuePrint = "Flag -> $flag Dice Number: $number";
+                  print(
+                      "Flag -> $flag && Number -> $number && threeSix -> $threeSix");
                   // print("$flag");
                   // First moves:
                   // if (g1 + number + 1 <= 56 &&
