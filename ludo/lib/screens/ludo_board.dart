@@ -902,8 +902,8 @@ class _LudoBoardState extends State<LudoBoard> {
                     // }
                   } else {
                     flag++;
-                    if (flag >= 4) {
-                      //if (flag >= 1) {
+                    // if (flag >= 4) {
+                    if (flag >= 1) {
                       flag = 0;
                     }
                     threeSix = 0;
