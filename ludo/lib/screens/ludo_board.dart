@@ -526,6 +526,7 @@ class _LudoBoardState extends State<LudoBoard> {
     105,
     90,
   ];
+  List indexing = [0, 1, 2, 3, 4, 5];
 
   @override
   Widget build(BuildContext context) {
@@ -556,6 +557,7 @@ class _LudoBoardState extends State<LudoBoard> {
                           225,
                           (index) {
                             return Stack(
+                              fit: StackFit.passthrough,
                               children: [
                                 GridTile(
                                   child: Container(
@@ -820,6 +822,7 @@ class _LudoBoardState extends State<LudoBoard> {
                                 //   ),
                                 // ),
                                 // All Stars
+
                                 IgnorePointer(
                                   child: Center(
                                     child: allStar.contains(index)
@@ -887,7 +890,6 @@ class _LudoBoardState extends State<LudoBoard> {
                       greenPiece['g4'] = true;
                       number = 0;
                     }
-
                     // if (flag == 1 && yellowPiece['y1'] != true) {
                     //   yellowPiece['y1'] = true;
                     //   number = 0;
