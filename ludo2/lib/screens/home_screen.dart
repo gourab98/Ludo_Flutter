@@ -13,6 +13,7 @@ class MyHomePage extends StatefulWidget {
 
 class _MyHomePageState extends State<MyHomePage> {
   var dice = Random();
+  int threeSix = 0;
   int turn = 0;
   int green = 0;
   int yellow = 0;
@@ -50,9 +51,12 @@ class _MyHomePageState extends State<MyHomePage> {
                             onTap: () {
                               setState(() {
                                 green = dice.nextInt(6) + 1;
-                                if (green == 6) {
+                                print('Green Color -> $green');
+                                if (green == 6 && threeSix != 2) {
+                                  threeSix++;
                                 } else {
                                   turn = 1;
+                                  threeSix = 0;
                                 }
                               });
                             },
@@ -83,12 +87,12 @@ class _MyHomePageState extends State<MyHomePage> {
                           ),
                         ),
 
-                  Container(
-                    alignment: Alignment.center,
-                    height: 100,
-                    width: 100,
-                    color: Colors.white,
-                  ),
+                  // Container(
+                  //   alignment: Alignment.center,
+                  //   height: 100,
+                  //   width: 100,
+                  //   color: Colors.white,
+                  // ),
                   // if (turn == 1)
                   turn == 1
                       ? Container(
@@ -100,9 +104,12 @@ class _MyHomePageState extends State<MyHomePage> {
                             onTap: () {
                               setState(() {
                                 yellow = dice.nextInt(6) + 1;
-                                if (yellow == 6) {
+                                print('Yellow Color -> $yellow');
+                                if (yellow == 6 && threeSix != 2) {
+                                  threeSix++;
                                 } else {
                                   turn = 2;
+                                  threeSix = 0;
                                 }
                               });
                             },
@@ -156,9 +163,12 @@ class _MyHomePageState extends State<MyHomePage> {
                             onTap: () {
                               setState(() {
                                 red = dice.nextInt(6) + 1;
-                                if (red == 6) {
+                                print('Red Color -> $red');
+                                if (red == 6 && threeSix != 2) {
+                                  threeSix++;
                                 } else {
                                   turn = 0;
+                                  threeSix = 0;
                                 }
                               });
                             },
@@ -188,12 +198,12 @@ class _MyHomePageState extends State<MyHomePage> {
                             ),
                           ),
                         ),
-                  Container(
-                    alignment: Alignment.center,
-                    height: 100,
-                    width: 100,
-                    color: Colors.white,
-                  ),
+                  // Container(
+                  //   alignment: Alignment.center,
+                  //   height: 100,
+                  //   width: 100,
+                  //   color: Colors.white,
+                  // ),
                   // if (turn == 2)
                   turn == 2
                       ? Container(
@@ -205,9 +215,12 @@ class _MyHomePageState extends State<MyHomePage> {
                             onTap: () {
                               setState(() {
                                 blue = dice.nextInt(6) + 1;
-                                if (blue == 6) {
+                                print('Blue Color -> $blue');
+                                if (blue == 6 && threeSix != 2) {
+                                  threeSix++;
                                 } else {
                                   turn = 3;
+                                  threeSix = 0;
                                 }
                               });
                             },
