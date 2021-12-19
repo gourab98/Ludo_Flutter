@@ -149,11 +149,34 @@ class _MyHomePageState extends State<MyHomePage> {
                         ),
                 ],
               ),
+              // Container(
+              //   alignment: Alignment.center,
+              //   child: Image(
+              //     image: AssetImage("assets/Ludo_board.png"),
+              //     fit: BoxFit.fill,
+              //   ),
+              // ),
               Container(
-                alignment: Alignment.center,
-                child: Image(
-                  image: AssetImage("assets/Ludo_board.png"),
-                  fit: BoxFit.fill,
+                decoration: BoxDecoration(
+                  image: DecorationImage(
+                    image: AssetImage("assets/Ludo_board.png"),
+                    fit: BoxFit.fill,
+                  ),
+                ),
+                child: AspectRatio(
+                  aspectRatio: 1,
+                  child: GridView.count(
+                    crossAxisCount: 15,
+                    childAspectRatio: 1,
+                    children: List.generate(225, (index) {
+                      return Container(
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(0),
+                          border: Border.all(color: Colors.black),
+                        ),
+                      );
+                    }),
+                  ),
                 ),
               ),
               Row(
