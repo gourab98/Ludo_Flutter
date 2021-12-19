@@ -45,7 +45,7 @@ class _MyHomePageState extends State<MyHomePage> {
                           alignment: Alignment.topLeft,
                           height: 100,
                           width: 100,
-                          color: Colors.green,
+                          color: Colors.white,
                           child: GestureDetector(
                             onTap: () {
                               setState(() {
@@ -95,7 +95,7 @@ class _MyHomePageState extends State<MyHomePage> {
                           alignment: Alignment.topRight,
                           height: 100,
                           width: 100,
-                          color: Colors.yellow,
+                          color: Colors.white,
                           child: GestureDetector(
                             onTap: () {
                               setState(() {
@@ -151,7 +151,7 @@ class _MyHomePageState extends State<MyHomePage> {
                           alignment: Alignment.topLeft,
                           height: 100,
                           width: 100,
-                          color: Colors.red,
+                          color: Colors.white,
                           child: GestureDetector(
                             onTap: () {
                               setState(() {
@@ -200,7 +200,7 @@ class _MyHomePageState extends State<MyHomePage> {
                           alignment: Alignment.topRight,
                           height: 100,
                           width: 100,
-                          color: Colors.blue,
+                          color: Colors.white,
                           child: GestureDetector(
                             onTap: () {
                               setState(() {
