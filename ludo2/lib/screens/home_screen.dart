@@ -20,6 +20,10 @@ class _MyHomePageState extends State<MyHomePage> {
   int blue = 0;
   int red = 0;
 
+  List greenValue = [];
+  List yellowValue = [];
+  List blueValue = [];
+  List redValue = [];
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -51,7 +55,9 @@ class _MyHomePageState extends State<MyHomePage> {
                             onTap: () {
                               setState(() {
                                 green = dice.nextInt(6) + 1;
+                                greenValue.add(green);
                                 print('Green Color -> $green');
+                                print('Green Value List-> $greenValue');
                                 if (green == 6 && threeSix != 2) {
                                   threeSix++;
                                 } else {
@@ -104,7 +110,9 @@ class _MyHomePageState extends State<MyHomePage> {
                             onTap: () {
                               setState(() {
                                 yellow = dice.nextInt(6) + 1;
+                                yellowValue.add(yellow);
                                 print('Yellow Color -> $yellow');
+//                                print('Yellow Value List-> $yellowValue');
                                 if (yellow == 6 && threeSix != 2) {
                                   threeSix++;
                                 } else {
@@ -163,6 +171,7 @@ class _MyHomePageState extends State<MyHomePage> {
                             onTap: () {
                               setState(() {
                                 red = dice.nextInt(6) + 1;
+                                redValue.add(red);
                                 print('Red Color -> $red');
                                 if (red == 6 && threeSix != 2) {
                                   threeSix++;
@@ -215,6 +224,7 @@ class _MyHomePageState extends State<MyHomePage> {
                             onTap: () {
                               setState(() {
                                 blue = dice.nextInt(6) + 1;
+                                blueValue.add(blue);
                                 print('Blue Color -> $blue');
                                 if (blue == 6 && threeSix != 2) {
                                   threeSix++;
