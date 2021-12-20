@@ -1,7 +1,8 @@
 import 'dart:math';
 
 import 'package:flutter/material.dart';
-import 'package:ludo2/widgets/dice.dart';
+import 'package:audioplayers/audioplayers.dart';
+import 'package:ludo2/widgets/sound.dart';
 
 class MyHomePage extends StatefulWidget {
   final String title;
@@ -56,6 +57,9 @@ class _MyHomePageState extends State<MyHomePage> {
                               setState(() {
                                 green = dice.nextInt(6) + 1;
                                 greenValue.add(green);
+                                //Sound();
+                                var diceSound = AudioCache();
+                                diceSound.play('MANYDICE.wav');
                                 print('Green Color -> $green');
                                 print('Green Value List-> $greenValue');
                                 if (green == 6 && threeSix != 2) {
@@ -113,6 +117,8 @@ class _MyHomePageState extends State<MyHomePage> {
                                 yellowValue.add(yellow);
                                 print('Yellow Color -> $yellow');
 //                                print('Yellow Value List-> $yellowValue');
+var diceSound = AudioCache();
+                                diceSound.play('MANYDICE.wav');
                                 if (yellow == 6 && threeSix != 2) {
                                   threeSix++;
                                 } else {
@@ -197,6 +203,8 @@ class _MyHomePageState extends State<MyHomePage> {
                                 red = dice.nextInt(6) + 1;
                                 redValue.add(red);
                                 print('Red Color -> $red');
+                                var diceSound = AudioCache();
+                                diceSound.play('MANYDICE.wav');
                                 if (red == 6 && threeSix != 2) {
                                   threeSix++;
                                 } else {
@@ -250,6 +258,8 @@ class _MyHomePageState extends State<MyHomePage> {
                                 blue = dice.nextInt(6) + 1;
                                 blueValue.add(blue);
                                 print('Blue Color -> $blue');
+                                var diceSound = AudioCache();
+                                diceSound.play('MANYDICE.wav');
                                 if (blue == 6 && threeSix != 2) {
                                   threeSix++;
                                 } else {
