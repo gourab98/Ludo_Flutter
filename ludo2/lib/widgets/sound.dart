@@ -4,6 +4,6 @@ class Sound {
   var diceSound = AudioCache();
 
   void dicesound() {
-    diceSound.play('MANYDICE.wav');
+    diceSound.play('dice_roll.mp3');
   }
 }

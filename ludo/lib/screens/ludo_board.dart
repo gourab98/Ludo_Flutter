@@ -1265,14 +1265,7 @@ class _LudoBoardState extends State<LudoBoard> {
                                     ),
                                   ),
                                 ),
-                                // Center(
-                                //   child: Text(
-                                //     "$index",
-                                //     style: TextStyle(
-                                //       fontWeight: FontWeight.bold,
-                                //     ),
-                                //   ),
-                                // ),
+
                                 //Board Color
                                 BoardQuarterColor(
                                     CellColorOnBoard: greenBoard,
