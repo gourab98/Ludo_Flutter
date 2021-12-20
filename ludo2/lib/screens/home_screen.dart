@@ -1,7 +1,5 @@
 import 'dart:math';
-
 import 'package:flutter/material.dart';
-import 'package:audioplayers/audioplayers.dart';
 import 'package:ludo2/widgets/sound.dart';
 
 class MyHomePage extends StatefulWidget {
@@ -14,6 +12,7 @@ class MyHomePage extends StatefulWidget {
 
 class _MyHomePageState extends State<MyHomePage> {
   var dice = Random();
+  var diceSound = Sound();
   int threeSix = 0;
   int turn = 0;
   int green = 0;
@@ -57,9 +56,7 @@ class _MyHomePageState extends State<MyHomePage> {
                               setState(() {
                                 green = dice.nextInt(6) + 1;
                                 greenValue.add(green);
-                                //Sound();
-                                var diceSound = AudioCache();
-                                diceSound.play('MANYDICE.wav');
+                                diceSound.dicesound();
                                 print('Green Color -> $green');
                                 print('Green Value List-> $greenValue');
                                 if (green == 6 && threeSix != 2) {
@@ -96,13 +93,6 @@ class _MyHomePageState extends State<MyHomePage> {
                             ),
                           ),
                         ),
-
-                  // Container(
-                  //   alignment: Alignment.center,
-                  //   height: 100,
-                  //   width: 100,
-                  //   color: Colors.white,
-                  // ),
                   // if (turn == 1)
                   turn == 1
                       ? Container(
@@ -116,9 +106,7 @@ class _MyHomePageState extends State<MyHomePage> {
                                 yellow = dice.nextInt(6) + 1;
                                 yellowValue.add(yellow);
                                 print('Yellow Color -> $yellow');
-//                                print('Yellow Value List-> $yellowValue');
-var diceSound = AudioCache();
-                                diceSound.play('MANYDICE.wav');
+                                diceSound.dicesound();
                                 if (yellow == 6 && threeSix != 2) {
                                   threeSix++;
                                 } else {
@@ -203,8 +191,7 @@ var diceSound = AudioCache();
                                 red = dice.nextInt(6) + 1;
                                 redValue.add(red);
                                 print('Red Color -> $red');
-                                var diceSound = AudioCache();
-                                diceSound.play('MANYDICE.wav');
+                                diceSound.dicesound();
                                 if (red == 6 && threeSix != 2) {
                                   threeSix++;
                                 } else {
@@ -258,8 +245,7 @@ var diceSound = AudioCache();
                                 blue = dice.nextInt(6) + 1;
                                 blueValue.add(blue);
                                 print('Blue Color -> $blue');
-                                var diceSound = AudioCache();
-                                diceSound.play('MANYDICE.wav');
+                                diceSound.dicesound();
                                 if (blue == 6 && threeSix != 2) {
                                   threeSix++;
                                 } else {
