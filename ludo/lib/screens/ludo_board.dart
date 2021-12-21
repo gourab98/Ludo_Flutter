@@ -1,6 +1,7 @@
 import 'dart:io';
 import 'dart:ui';
 
+import 'package:audioplayers/audioplayers.dart';
 import 'package:avatar_glow/avatar_glow.dart';
 import 'package:flutter/material.dart';
 import 'package:ludo/widgets/anti_tile.dart';
@@ -33,6 +34,7 @@ class _LudoBoardState extends State<LudoBoard> {
   int threeSix = 0;
   String diceValuePrint = "Nothing";
   Color color = Colors.green;
+  var pieceSound = AudioCache();
 
   // All Pieces Value:
   Map<String, bool> greenPiece = {
@@ -1332,10 +1334,12 @@ class _LudoBoardState extends State<LudoBoard> {
                                             //     () {
                                             for (int i = 0; i < number; i++) {
                                               await Future.delayed(
-                                                  Duration(seconds: 1));
+                                                  Duration(milliseconds: 500));
                                               setState(() {
                                                 g1Clear = g1;
                                                 g1 = g1 + 1;
+                                                pieceSound
+                                                    .play('token_move.mp3');
                                               });
                                             }
                                             // });
@@ -1562,6 +1566,7 @@ class _LudoBoardState extends State<LudoBoard> {
                 // print("Dice is rolling");
                 setState(() {
                   number = dice.nextInt(6) + 1;
+                  pieceSound.play('dice_roll.mp3');
                   //g1 experimental moves:
                   // if (g1 + number + 1 <= 56) {
                   //   g1Clear = g1;

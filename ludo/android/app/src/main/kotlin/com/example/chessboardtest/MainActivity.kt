@@ -1,4 +1,4 @@
-package com.example.ludo
+package com.example.chessboardtest
 
 import io.flutter.embedding.android.FlutterActivity
 
