@@ -1,3 +1,4 @@
+import 'dart:io';
 import 'dart:ui';
 
 import 'package:avatar_glow/avatar_glow.dart';
@@ -918,6 +919,7 @@ class _LudoBoardState extends State<LudoBoard> {
 
   //Green Pieces:
   int g1 = 1;
+  int g11 = 1;
   int g1Clear = 0;
   int g2 = 2;
   int g2Clear = 0;
@@ -1315,20 +1317,32 @@ class _LudoBoardState extends State<LudoBoard> {
                                       color: Colors.green,
                                       pieceSize: pieceSize,
                                       accessedCell: greenPiecePath[g1],
-                                      child: InkWell(
-//                                        behavior: HitTestBehavior.translucent,
-                                        onTap: () {
+                                      child: GestureDetector(
+                                        //                                        behavior: HitTestBehavior.translucent,
+                                        onTap: () async {
                                           print("'g1' is pressed $g1");
-                                          setState(() {
-                                            if (g1 == 1) {
-                                              g1 = 5;
-                                              g1Clear = 1;
-                                            } else if (g1 + number <= 61) {
-                                              g1Clear = g1;
-                                              g1 = number + g1;
-                                              number = 0;
+                                          // setState(() async {
+                                          if (g1 == 1) {
+                                            g1 = 5;
+                                            g1Clear = 1;
+                                          } else if (g1 + number <= 61) {
+                                            g1Clear = g1;
+                                            // var future = Future.delayed(
+                                            //     Duration(milliseconds: 1000),
+                                            //     () {
+                                            for (int i = 0; i < number; i++) {
+                                              await Future.delayed(
+                                                  Duration(seconds: 1));
+                                              setState(() {
+                                                g1Clear = g1;
+                                                g1 = g1 + 1;
+                                              });
                                             }
-                                          });
+                                            // });
+                                            //g1 = number + g1;
+                                            number = 0;
+                                          }
+                                          // });
                                         },
                                         child: Center(
                                           child: Text("g1",
@@ -1561,25 +1575,29 @@ class _LudoBoardState extends State<LudoBoard> {
                     if (flag == 0 && greenPiece['g1'] != true) {
                       greenPiece['g1'] = true;
                       number = 0;
-                    } else if (flag == 0 &&
-                        greenPiece['g1'] == true &&
-                        greenPiece['g2'] != true) {
-                      greenPiece['g2'] = true;
-                      number = 0;
-                    } else if (flag == 0 &&
-                        greenPiece['g1'] == true &&
-                        greenPiece['g2'] == true &&
-                        greenPiece['g3'] != true) {
-                      greenPiece['g3'] = true;
-                      number = 0;
-                    } else if (flag == 0 &&
-                        greenPiece['g1'] == true &&
-                        greenPiece['g2'] == true &&
-                        greenPiece['g3'] == true &&
-                        greenPiece['g4'] != true) {
-                      greenPiece['g4'] = true;
-                      number = 0;
                     }
+                    // Green
+                    // else if (flag == 0 &&
+                    //     greenPiece['g1'] == true &&
+                    //     greenPiece['g2'] != true) {
+                    //   greenPiece['g2'] = true;
+                    //   number = 0;
+                    // } else if (flag == 0 &&
+                    //     greenPiece['g1'] == true &&
+                    //     greenPiece['g2'] == true &&
+                    //     greenPiece['g3'] != true) {
+                    //   greenPiece['g3'] = true;
+                    //   number = 0;
+                    // } else if (flag == 0 &&
+                    //     greenPiece['g1'] == true &&
+                    //     greenPiece['g2'] == true &&
+                    //     greenPiece['g3'] == true &&
+                    //     greenPiece['g4'] != true) {
+                    //   greenPiece['g4'] = true;
+                    //   number = 0;
+                    // }
+
+                    //Yellow Part!
                     // if (flag == 1 && yellowPiece['y1'] != true) {
                     //   yellowPiece['y1'] = true;
                     //   number = 0;
