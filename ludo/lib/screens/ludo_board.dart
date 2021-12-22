@@ -1334,7 +1334,7 @@ class _LudoBoardState extends State<LudoBoard> {
                                             //     () {
                                             for (int i = 0; i < number; i++) {
                                               await Future.delayed(
-                                                  Duration(milliseconds: 500));
+                                                  Duration(milliseconds: 300));
                                               setState(() {
                                                 g1Clear = g1;
                                                 g1 = g1 + 1;

@@ -19,6 +19,9 @@ class _MyHomePageState extends State<MyHomePage> {
   int yellow = 0;
   int blue = 0;
   int red = 0;
+  List firstPosition = [33];
+  List lastPostion = [91];
+  bool g2 = false;
 
   List greenValue = [];
   List yellowValue = [];
@@ -151,35 +154,79 @@ class _MyHomePageState extends State<MyHomePage> {
               //     fit: BoxFit.fill,
               //   ),
               // ),
-              Container(
-                decoration: BoxDecoration(
-                  image: DecorationImage(
-                    image: AssetImage("assets/Ludo_board.png"),
-                    fit: BoxFit.fill,
-                  ),
-                ),
-                child: AspectRatio(
-                  aspectRatio: 1,
-                  child: GridView.count(
-                    crossAxisCount: 15,
-                    childAspectRatio: 1,
-                    children: List.generate(225, (index) {
-                      return Container(
-                        decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(0),
-                          border: Border.all(color: Colors.black),
-                          // color: Colors.amber,
+              SafeArea(
+                child: LayoutBuilder(
+                  builder: (context, constraints) {
+                    double sizeHeight = constraints.maxHeight;
+                    double sizeWeight = constraints.maxWidth;
+                    Size size = Size(sizeHeight, sizeWeight);
+                    double boardSize = size.height;
+                    double pieceSize = size.height / 15;
+                    //bool g2 = true;
+
+                    return Stack(
+                      children: <Widget>[
+                        Container(
+                          decoration: BoxDecoration(
+                            image: DecorationImage(
+                              image: AssetImage("assets/Ludo_board.png"),
+                              fit: BoxFit.fill,
+                            ),
+                          ),
+                          child: AspectRatio(
+                            aspectRatio: 1,
+                            child: GridView.count(
+                              crossAxisCount: 15,
+                              childAspectRatio: 1,
+                              children: List.generate(225, (index) {
+                                return Container(
+                                  //child: Center(child: Text("$index")),
+                                  decoration: BoxDecoration(
+                                    borderRadius: BorderRadius.circular(0),
+                                    border: Border.all(color: Colors.black),
+                                    // color: Colors.amber,
+                                  ),
+                                );
+                              }),
+                            ),
+                          ),
                         ),
-                      );
-                    }),
-                  ),
+                        AnimatedPositioned(
+                          duration: Duration(milliseconds: 250),
+                          top: (g2)
+                              ? (6 * boardSize / 15)
+                              : (2 * boardSize / 15),
+                          left: (g2)
+                              ? (1 * boardSize / 15)
+                              : (3 * boardSize / 15),
+                          child: GestureDetector(
+                            onTap: () {
+                              setState(() {
+                                g2 = !g2;
+                                print('I am being pressed $g2');
+                              });
+                            },
+                            child: Container(
+                              height: pieceSize,
+                              width: pieceSize,
+                              decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(50),
+                                border: Border.all(color: Colors.black),
+                                color: Colors.amber,
+                              ),
+                            ),
+                          ),
+                        ),
+                      ],
+                    );
+                  },
                 ),
               ),
+
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: <Widget>[
                   // if (turn == 3)
-
                   turn == 3
                       ? Container(
                           alignment: Alignment.topLeft,
