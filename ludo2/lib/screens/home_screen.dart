@@ -1,6 +1,8 @@
 import 'dart:math';
 import 'package:flutter/material.dart';
+import 'package:ludo2/widgets/anti_tile.dart';
 import 'package:ludo2/widgets/sound.dart';
+import 'package:ludo2/widgets/tile.dart';
 
 class MyHomePage extends StatefulWidget {
   final String title;
@@ -12,16 +14,78 @@ class MyHomePage extends StatefulWidget {
 
 class _MyHomePageState extends State<MyHomePage> {
   var dice = Random();
-  var diceSound = Sound();
+  var allSound = Sound();
   int threeSix = 0;
   int turn = 0;
   int green = 0;
   int yellow = 0;
   int blue = 0;
   int red = 0;
-  List firstPosition = [33];
-  List lastPostion = [91];
-  bool g2 = false;
+
+  bool g1FromBoard = false;
+  int g1 = 1;
+  int g1Clear = 0;
+
+  List greenPiecePath = [
+    32,
+    91,
+    92,
+    93,
+    94,
+    95,
+    81,
+    66,
+    51,
+    36,
+    21,
+    6,
+    7,
+    8,
+    23,
+    38,
+    53,
+    68,
+    83,
+    99,
+    100,
+    101,
+    102,
+    103,
+    104,
+    119,
+    134,
+    133,
+    132,
+    131,
+    130,
+    129,
+    143,
+    158,
+    173,
+    188,
+    203,
+    218,
+    217,
+    216,
+    201,
+    186,
+    171,
+    156,
+    141,
+    125,
+    124,
+    123,
+    122,
+    121,
+    120,
+    105,
+    106,
+    107,
+    108,
+    109,
+    110,
+    111,
+  ];
 
   List greenValue = [];
   List yellowValue = [];
@@ -60,7 +124,7 @@ class _MyHomePageState extends State<MyHomePage> {
                               setState(() {
                                 green = dice.nextInt(6) + 1;
                                 greenValue.add(green);
-                                diceSound.dicesound();
+                                allSound.diceSound();
                                 print('Green Color -> $green');
                                 print('Green Value List-> $greenValue');
                                 if (green == 6 && threeSix != 2) {
@@ -110,7 +174,7 @@ class _MyHomePageState extends State<MyHomePage> {
                                 yellow = dice.nextInt(6) + 1;
                                 yellowValue.add(yellow);
                                 print('Yellow Color -> $yellow');
-                                diceSound.dicesound();
+                                allSound.diceSound();
                                 if (yellow == 6 && threeSix != 2) {
                                   threeSix++;
                                 } else {
@@ -162,7 +226,6 @@ class _MyHomePageState extends State<MyHomePage> {
                     Size size = Size(sizeHeight, sizeWeight);
                     double boardSize = size.height;
                     double pieceSize = size.height / 15;
-                    //bool g2 = true;
 
                     return Stack(
                       children: <Widget>[
@@ -179,13 +242,47 @@ class _MyHomePageState extends State<MyHomePage> {
                               crossAxisCount: 15,
                               childAspectRatio: 1,
                               children: List.generate(225, (index) {
-                                return Container(
-                                  //child: Center(child: Text("$index")),
-                                  decoration: BoxDecoration(
-                                    borderRadius: BorderRadius.circular(0),
-                                    border: Border.all(color: Colors.black),
-                                    // color: Colors.amber,
-                                  ),
+                                return Stack(
+                                  children: <Widget>[
+                                    Container(
+                                      //child: Center(child: Text("$index")),
+                                      decoration: BoxDecoration(
+                                        borderRadius: BorderRadius.circular(0),
+                                        border: Border.all(color: Colors.black),
+                                      ),
+                                    ),
+                                    Tile(
+                                      pieceSize: pieceSize,
+                                      color: Colors.greenAccent,
+                                      index: index,
+                                      accessedCell: greenPiecePath[g1],
+                                      child: GestureDetector(
+                                        onTap: () async {
+                                          print("I am pressed");
+                                          if (g1 + green <= 58) {
+                                            for (int i = 0; i < green; i++) {
+                                              await Future.delayed(
+                                                  Duration(milliseconds: 300));
+                                              setState(() {
+                                                g1Clear = g1;
+                                                g1 = g1 + 1;
+                                                allSound.pieceSound();
+                                                green = 0;
+                                              });
+                                            }
+                                          }
+                                        },
+                                      ),
+                                    ),
+                                    IgnorePointer(
+                                      child: Center(
+                                        child: AntiTile(
+                                          index: index,
+                                          accessedCell: greenPiecePath[g1Clear],
+                                        ),
+                                      ),
+                                    ),
+                                  ],
                                 );
                               }),
                             ),
@@ -193,26 +290,30 @@ class _MyHomePageState extends State<MyHomePage> {
                         ),
                         AnimatedPositioned(
                           duration: Duration(milliseconds: 250),
-                          top: (g2)
+                          top: (g1FromBoard)
                               ? (6 * boardSize / 15)
                               : (2 * boardSize / 15),
-                          left: (g2)
+                          left: (g1FromBoard)
                               ? (1 * boardSize / 15)
-                              : (3 * boardSize / 15),
+                              : (2 * boardSize / 15),
                           child: GestureDetector(
                             onTap: () {
                               setState(() {
-                                g2 = !g2;
-                                print('I am being pressed $g2');
+                                g1FromBoard = !g1FromBoard;
+                                print('I am being pressed $g1FromBoard');
                               });
                             },
                             child: Container(
                               height: pieceSize,
                               width: pieceSize,
                               decoration: BoxDecoration(
-                                borderRadius: BorderRadius.circular(50),
+                                borderRadius: g1FromBoard
+                                    ? BorderRadius.circular(50)
+                                    : BorderRadius.circular(0),
                                 border: Border.all(color: Colors.black),
-                                color: Colors.amber,
+                                color: g1FromBoard
+                                    ? Colors.greenAccent
+                                    : Colors.green,
                               ),
                             ),
                           ),
@@ -239,7 +340,7 @@ class _MyHomePageState extends State<MyHomePage> {
                                 red = dice.nextInt(6) + 1;
                                 redValue.add(red);
                                 print('Red Color -> $red');
-                                diceSound.dicesound();
+                                allSound.diceSound();
                                 if (red == 6 && threeSix != 2) {
                                   threeSix++;
                                 } else {
@@ -293,7 +394,7 @@ class _MyHomePageState extends State<MyHomePage> {
                                 blue = dice.nextInt(6) + 1;
                                 blueValue.add(blue);
                                 print('Blue Color -> $blue');
-                                diceSound.dicesound();
+                                allSound.diceSound();
                                 if (blue == 6 && threeSix != 2) {
                                   threeSix++;
                                 } else {

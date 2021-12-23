@@ -1,9 +1,14 @@
 import 'package:audioplayers/audioplayers.dart';
 
 class Sound {
-  var diceSound = AudioCache();
+  var diceSounds = AudioCache();
+  var pieceSounds = AudioCache();
 
-  void dicesound() {
-    diceSound.play('dice_roll.mp3');
+  void diceSound() {
+    diceSounds.play('dice_roll.mp3');
+  }
+
+  void pieceSound() {
+    pieceSounds.play('token_move.mp3');
   }
 }
