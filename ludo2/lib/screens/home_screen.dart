@@ -1,6 +1,7 @@
 import 'dart:math';
 import 'package:flutter/material.dart';
 import 'package:ludo2/widgets/anti_tile.dart';
+import 'package:ludo2/widgets/selected_piece_glowing.dart';
 import 'package:ludo2/widgets/sound.dart';
 import 'package:ludo2/widgets/tile.dart';
 
@@ -23,8 +24,11 @@ class _MyHomePageState extends State<MyHomePage> {
   int red = 0;
 
   bool g1FromBoard = false;
-  int g1 = 1;
-  int g1Clear = 0;
+  bool g2FromBoard = false;
+  bool g3FromBoard = false;
+  bool g4FromBoard = false;
+  int g1 = 2;
+  int g1Clear = 1;
 
   List greenPiecePath = [
     32,
@@ -103,6 +107,7 @@ class _MyHomePageState extends State<MyHomePage> {
             fontSize: 24,
           ),
         ),
+        centerTitle: true,
         elevation: 12,
       ),
       body: SafeArea(
@@ -211,6 +216,7 @@ class _MyHomePageState extends State<MyHomePage> {
                         ),
                 ],
               ),
+
               // Container(
               //   alignment: Alignment.center,
               //   child: Image(
@@ -218,6 +224,7 @@ class _MyHomePageState extends State<MyHomePage> {
               //     fit: BoxFit.fill,
               //   ),
               // ),
+
               SafeArea(
                 child: LayoutBuilder(
                   builder: (context, constraints) {
@@ -267,11 +274,28 @@ class _MyHomePageState extends State<MyHomePage> {
                                                 g1Clear = g1;
                                                 g1 = g1 + 1;
                                                 allSound.pieceSound();
-                                                green = 0;
                                               });
                                             }
+                                            green = 0;
                                           }
                                         },
+                                        child: Container(
+                                          child: green != 0
+                                              ? Glowing(
+                                                  pieceSize: pieceSize,
+                                                  color: Colors.greenAccent,
+                                                )
+                                              : null,
+                                          //height: pieceSize,
+                                          //width: pieceSize,
+                                          decoration: BoxDecoration(
+                                            borderRadius:
+                                                BorderRadius.circular(500),
+                                            border:
+                                                Border.all(color: Colors.black),
+                                            color: Colors.greenAccent,
+                                          ),
+                                        ),
                                       ),
                                     ),
                                     IgnorePointer(
@@ -288,13 +312,14 @@ class _MyHomePageState extends State<MyHomePage> {
                             ),
                           ),
                         ),
+                        // g1FromBoard:
                         AnimatedPositioned(
                           duration: Duration(milliseconds: 250),
                           top: (g1FromBoard)
-                              ? (6 * boardSize / 15)
+                              ? (6 * boardSize / 15) // - 7.5
                               : (2 * boardSize / 15),
                           left: (g1FromBoard)
-                              ? (1 * boardSize / 15)
+                              ? (1 * boardSize / 15) - 7.5
                               : (2 * boardSize / 15),
                           child: GestureDetector(
                             onTap: () {
@@ -304,16 +329,105 @@ class _MyHomePageState extends State<MyHomePage> {
                               });
                             },
                             child: Container(
+                              //margin: EdgeInsets.all(10),
                               height: pieceSize,
                               width: pieceSize,
                               decoration: BoxDecoration(
                                 borderRadius: g1FromBoard
                                     ? BorderRadius.circular(50)
-                                    : BorderRadius.circular(0),
+                                    : BorderRadius.circular(50),
                                 border: Border.all(color: Colors.black),
                                 color: g1FromBoard
-                                    ? Colors.greenAccent
-                                    : Colors.green,
+                                    ? Colors.green
+                                    : Colors.greenAccent,
+                              ),
+                            ),
+                          ),
+                        ),
+                        // g2FromBoard:
+                        AnimatedPositioned(
+                          duration: Duration(milliseconds: 250),
+                          top: (g2FromBoard)
+                              ? (6 * boardSize / 15)
+                              : (2 * boardSize / 15),
+                          left: (g2FromBoard)
+                              ? (1 * boardSize / 15) - 2.5
+                              : (3 * boardSize / 15),
+                          child: GestureDetector(
+                            onTap: () {
+                              setState(() {
+                                g2FromBoard = !g2FromBoard;
+                                print('I am being pressed $g2FromBoard');
+                              });
+                            },
+                            child: Container(
+                              height: pieceSize,
+                              width: pieceSize,
+                              decoration: BoxDecoration(
+                                borderRadius: g2FromBoard
+                                    ? BorderRadius.circular(50)
+                                    : BorderRadius.circular(50),
+                                border: Border.all(color: Colors.black),
+                                color:
+                                    g2FromBoard ? Colors.green : Colors.yellow,
+                              ),
+                            ),
+                          ),
+                        ),
+                        // g3FromBoard:
+                        AnimatedPositioned(
+                          duration: Duration(milliseconds: 250),
+                          top: (g3FromBoard)
+                              ? (6 * boardSize / 15)
+                              : (3 * boardSize / 15),
+                          left: (g3FromBoard)
+                              ? (1 * boardSize / 15) + 2.5
+                              : (3 * boardSize / 15),
+                          child: GestureDetector(
+                            onTap: () {
+                              setState(() {
+                                g3FromBoard = !g3FromBoard;
+                                print('I am being pressed $g3FromBoard');
+                              });
+                            },
+                            child: Container(
+                              height: pieceSize,
+                              width: pieceSize,
+                              decoration: BoxDecoration(
+                                borderRadius: g3FromBoard
+                                    ? BorderRadius.circular(50)
+                                    : BorderRadius.circular(50),
+                                border: Border.all(color: Colors.black),
+                                color: g3FromBoard ? Colors.green : Colors.blue,
+                              ),
+                            ),
+                          ),
+                        ),
+                        // g4FromBoard:
+                        AnimatedPositioned(
+                          duration: Duration(milliseconds: 250),
+                          top: (g4FromBoard)
+                              ? (6 * boardSize / 15)
+                              : (3 * boardSize / 15),
+                          left: (g4FromBoard)
+                              ? (1 * boardSize / 15) + 7.5
+                              : (2 * boardSize / 15),
+                          child: GestureDetector(
+                            onTap: () {
+                              setState(() {
+                                g4FromBoard = !g4FromBoard;
+                                print('I am being pressed $g4FromBoard');
+                              });
+                            },
+                            child: Container(
+                              height: pieceSize,
+                              width: pieceSize,
+                              decoration: BoxDecoration(
+                                borderRadius: g4FromBoard
+                                    ? BorderRadius.circular(50)
+                                    : BorderRadius.circular(50),
+                                border: Border.all(color: Colors.black),
+                                color: g4FromBoard ? Colors.green : Colors.red,
                               ),
                             ),
                           ),
@@ -382,6 +496,7 @@ class _MyHomePageState extends State<MyHomePage> {
                   //   color: Colors.white,
                   // ),
                   // if (turn == 2)
+
                   turn == 2
                       ? Container(
                           alignment: Alignment.topRight,

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:ludo2/screens/home_screen.dart';
+import 'package:ludo2/widgets/selected_piece_glowing.dart';
 
 void main() {
   runApp(const MyApp());
@@ -18,6 +19,7 @@ class MyApp extends StatelessWidget {
       ),
       debugShowCheckedModeBanner: false,
       home: MyHomePage(title: 'Home Page'),
+//      home: Glowing(),
     );
   }
 }

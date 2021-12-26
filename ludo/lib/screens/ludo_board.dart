@@ -1328,7 +1328,7 @@ class _LudoBoardState extends State<LudoBoard> {
                                             g1 = 5;
                                             g1Clear = 1;
                                           } else if (g1 + number <= 61) {
-                                            g1Clear = g1;
+                                            //g1Clear = g1;
                                             // var future = Future.delayed(
                                             //     Duration(milliseconds: 1000),
                                             //     () {
