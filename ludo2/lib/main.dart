@@ -18,8 +18,8 @@ class MyApp extends StatelessWidget {
         unselectedWidgetColor: Colors.blue,
       ),
       debugShowCheckedModeBanner: false,
-      //home: MyHomePage(title: 'Home Page'),
-      home: TestRoration(),
+      home: MyHomePage(title: 'Home Page'),
+      //home: TestRoration(),
     );
   }
 }

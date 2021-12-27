@@ -438,7 +438,7 @@ class _MyHomePageState extends State<MyHomePage> {
                         //Rotation Example:
 
                         Positioned(
-                          top: 3 * boardSize / 15 - 5,
+                          top: 2 * boardSize / 15 - 5,
                           left: 6 * boardSize / 15 - 5,
                           child: Center(
                             child: Container(

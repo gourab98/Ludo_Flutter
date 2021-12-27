@@ -116,11 +116,9 @@ class _TestingState extends State<Testing> with SingleTickerProviderStateMixin {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      //backgroundColor: Colors.blue,
-      body: Center(
-        child: getRotation(),
-      ),
+    return Container(
+      color: Colors.amber,
+      child: getRotation(),
     );
   }
 }
