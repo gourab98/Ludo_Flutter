@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:ludo2/screens/home_screen.dart';
-import 'package:ludo2/widgets/selected_piece_glowing.dart';
+import 'package:ludo2/test.dart';
 
 void main() {
   runApp(const MyApp());
@@ -18,8 +18,8 @@ class MyApp extends StatelessWidget {
         unselectedWidgetColor: Colors.blue,
       ),
       debugShowCheckedModeBanner: false,
-      home: MyHomePage(title: 'Home Page'),
-//      home: Glowing(),
+      //home: MyHomePage(title: 'Home Page'),
+      home: TestRoration(),
     );
   }
 }

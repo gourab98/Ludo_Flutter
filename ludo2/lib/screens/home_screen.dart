@@ -1,5 +1,6 @@
 import 'dart:math';
 import 'package:flutter/material.dart';
+import 'package:ludo2/test.dart';
 import 'package:ludo2/widgets/anti_tile.dart';
 import 'package:ludo2/widgets/selected_piece_glowing.dart';
 import 'package:ludo2/widgets/sound.dart';
@@ -14,6 +15,7 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
+  static const double pi = 3.1415926535897932;
   var dice = Random();
   var allSound = Sound();
   int threeSix = 0;
@@ -235,6 +237,7 @@ class _MyHomePageState extends State<MyHomePage> {
                     double pieceSize = size.height / 15;
 
                     return Stack(
+                      clipBehavior: Clip.none,
                       children: <Widget>[
                         Container(
                           decoration: BoxDecoration(
@@ -432,6 +435,25 @@ class _MyHomePageState extends State<MyHomePage> {
                             ),
                           ),
                         ),
+                        //Rotation Example:
+
+                        Positioned(
+                          top: 3 * boardSize / 15 - 5,
+                          left: 6 * boardSize / 15 - 5,
+                          child: Center(
+                            child: Container(
+                              child: TestRoration(),
+                              clipBehavior: Clip.none,
+                              height: pieceSize + 10,
+                              width: pieceSize + 10,
+                              decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(50),
+                                border: Border.all(color: Colors.black),
+                                color: Colors.transparent,
+                              ),
+                            ),
+                          ),
+                        )
                       ],
                     );
                   },
