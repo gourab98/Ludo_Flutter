@@ -1,19 +1,37 @@
 import 'package:flutter/material.dart';
-import 'dart:math';
+// This class is for piece glowing effect(Glowing effect comes from a border effect that enlarge in forward manner.)
 
 class TestRoration extends StatelessWidget {
-  const TestRoration({Key? key}) : super(key: key);
+  final double pieceSize;
+  final Color color;
+  const TestRoration({
+    Key? key,
+    required this.pieceSize,
+    required this.color,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Testing(),
+      backgroundColor: Colors.transparent,
+      body: Center(
+        child: Testing(
+          pieceSize: pieceSize,
+          color: color,
+        ),
+      ),
     );
   }
 }
 
 class Testing extends StatefulWidget {
-  Testing({Key? key}) : super(key: key);
+  final double pieceSize;
+  final Color color;
+  Testing({
+    Key? key,
+    required this.pieceSize,
+    required this.color,
+  }) : super(key: key);
 
   @override
   _TestingState createState() => _TestingState();
@@ -32,15 +50,16 @@ class _TestingState extends State<Testing> with SingleTickerProviderStateMixin {
               children: [
                 Center(
                   child: Container(
-                    padding: EdgeInsets.all(_controller.value * 30),
+                    padding: EdgeInsets.all(
+                        _controller.value * (widget.pieceSize * 1.25)),
                     decoration: BoxDecoration(
                       color: Colors.transparent,
                       shape: BoxShape.rectangle,
                       borderRadius: BorderRadius.all(Radius.circular(500)),
                       border: Border.all(
                         style: BorderStyle.solid,
-                        color: Colors.black,
-                        //width: _controller.value * 10,
+                        color: Colors.white,
+                        //width: _controller.value * 2,
                       ),
                     ),
                     child: RotationTransition(
@@ -49,30 +68,38 @@ class _TestingState extends State<Testing> with SingleTickerProviderStateMixin {
                           Tween(begin: 0.0, end: pi * 2).animate(_controller),
                       // child: Icon(
                       //   Icons.rotate_right,
-                      //   size: 75,
+                      //   size: widget.pieceSize / 2,
                       //   color: Colors.green,
+                      // ),
+                      // child: Container(
+                      //   height: (widget.pieceSize / 2) + 5,
+                      //   color: Colors.white,
                       // ),
                     ),
                   ),
                 ),
                 Center(
                   child: Container(
+                    height: (widget.pieceSize) / 2,
+                    width: (widget.pieceSize) / 2,
                     padding: EdgeInsets.all(5),
                     decoration: BoxDecoration(
-                      color: Colors.green,
+                      color: widget.color,
                       shape: BoxShape.rectangle,
                       borderRadius: BorderRadius.all(Radius.circular(500)),
                       border: Border.all(
                         style: BorderStyle.solid,
-                        color: Colors.blue,
+                        color: Colors.white,
                       ),
                     ),
-                    child: Text(
-                      "g1",
-                      style: TextStyle(
-                        color: Colors.white,
-                        fontSize: 5,
-                        fontWeight: FontWeight.bold,
+                    child: Center(
+                      child: Text(
+                        "G1",
+                        style: TextStyle(
+                          color: Colors.white,
+                          fontSize: 10,
+                          fontWeight: FontWeight.bold,
+                        ),
                       ),
                     ),
                   ),
@@ -86,7 +113,7 @@ class _TestingState extends State<Testing> with SingleTickerProviderStateMixin {
   @override
   void initState() {
     _controller = AnimationController(
-      duration: const Duration(milliseconds: 500),
+      duration: const Duration(milliseconds: 1000),
       vsync: this,
     )..repeat();
     // _controller.addStatusListener((animationStatus) {
@@ -117,7 +144,8 @@ class _TestingState extends State<Testing> with SingleTickerProviderStateMixin {
   @override
   Widget build(BuildContext context) {
     return Container(
-      color: Colors.amber,
+      height: widget.pieceSize * 2,
+      width: widget.pieceSize * 2,
       child: getRotation(),
     );
   }

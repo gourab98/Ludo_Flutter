@@ -1,11 +1,12 @@
 import 'dart:math';
 import 'package:flutter/material.dart';
-import 'package:ludo2/test.dart';
+import 'package:ludo2/widgets/test.dart';
 import 'package:ludo2/widgets/anti_tile.dart';
 import 'package:ludo2/widgets/selected_piece_glowing.dart';
 import 'package:ludo2/widgets/sound.dart';
 import 'package:ludo2/widgets/tile.dart';
 
+// This is the ludo board class.
 class MyHomePage extends StatefulWidget {
   final String title;
   MyHomePage({Key? key, required this.title}) : super(key: key);
@@ -436,21 +437,23 @@ class _MyHomePageState extends State<MyHomePage> {
                           ),
                         ),
                         //Rotation Example:
-
                         Positioned(
-                          top: 2 * boardSize / 15 - 5,
-                          left: 6 * boardSize / 15 - 5,
+                          top: 2 * boardSize / 15 - (pieceSize / 2),
+                          left: 6 * boardSize / 15 - (pieceSize / 2),
                           child: Center(
                             child: Container(
-                              child: TestRoration(),
-                              clipBehavior: Clip.none,
-                              height: pieceSize + 10,
-                              width: pieceSize + 10,
-                              decoration: BoxDecoration(
-                                borderRadius: BorderRadius.circular(50),
-                                border: Border.all(color: Colors.black),
-                                color: Colors.transparent,
+                              child: TestRoration(
+                                color: Colors.blue,
+                                pieceSize: pieceSize,
                               ),
+                              clipBehavior: Clip.none,
+                              height: pieceSize * 2,
+                              width: pieceSize * 2,
+                              // decoration: BoxDecoration(
+                              //   borderRadius: BorderRadius.circular(50),
+                              //   border: Border.all(color: Colors.black),
+                              //   color: Colors.transparent,
+                              // ),
                             ),
                           ),
                         )

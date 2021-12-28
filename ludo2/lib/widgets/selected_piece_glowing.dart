@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+// This class is for glowing piece(Glowing effect comes from enhancing the broder of the piece container)
 class Glowing extends StatelessWidget {
   final double pieceSize;
   final Color color;
@@ -45,7 +46,7 @@ class _TestState extends State<Test> with TickerProviderStateMixin {
               shape: BoxShape.rectangle,
               borderRadius: BorderRadius.all(Radius.circular(500)),
               border: Border.all(
-                  color: Colors.amber, width: _resizableController.value * 5),
+                  color: Colors.amber, width: _resizableController.value * 20),
             ),
           );
         });

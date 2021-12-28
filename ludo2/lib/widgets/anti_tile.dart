@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+// This class is for remove all the previous drawing of piece which is created for the tile class.
 class AntiTile extends StatefulWidget {
   AntiTile({
     required this.index,
