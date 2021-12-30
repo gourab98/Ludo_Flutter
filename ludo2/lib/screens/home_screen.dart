@@ -270,17 +270,17 @@ class _MyHomePageState extends State<MyHomePage> {
                                       child: GestureDetector(
                                         onTap: () async {
                                           print("I am pressed");
-                                          if (g1 + green <= 58) {
+                                          if (g1 + green <= 57) {
                                             for (int i = 0; i < green; i++) {
                                               await Future.delayed(
-                                                  Duration(milliseconds: 300));
+                                                  Duration(milliseconds: 100));
                                               setState(() {
                                                 g1Clear = g1;
                                                 g1 = g1 + 1;
                                                 allSound.pieceSound();
                                               });
                                             }
-                                            green = 0;
+                                            //green = 0;
                                           }
                                         },
                                         child: Container(

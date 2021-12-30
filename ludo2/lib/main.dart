@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:ludo2/Piece_animation.dart';
 import 'package:ludo2/screens/home_screen.dart';
+import 'package:ludo2/widgets/animation_demo.dart';
 import 'package:ludo2/widgets/selected_piece_glowing.dart';
 import 'package:ludo2/widgets/test.dart';
 
@@ -20,12 +22,14 @@ class MyApp extends StatelessWidget {
         unselectedWidgetColor: Colors.blue,
       ),
       debugShowCheckedModeBanner: false,
-      home: MyHomePage(title: 'Home Page'),
+      //home: MyHomePage(title: 'Home Page'),
       // home: Container(
       //   child: TestRoration(color: Colors.blue, pieceSize: 50),
       //   color: Colors.green,
       // ),
       //home: Test(pieceSize: 50, color: Colors.blue),
+      //home: Piece_animation(),
+      home: Piece(),
     );
   }
 }
