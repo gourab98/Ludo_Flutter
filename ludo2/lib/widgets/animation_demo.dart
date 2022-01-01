@@ -1,6 +1,7 @@
 import 'dart:math';
 
 import 'package:flutter/material.dart';
+import 'package:ludo2/widgets/sound.dart';
 
 class Piece extends StatelessWidget {
   @override
@@ -21,6 +22,7 @@ class AutoMove extends StatefulWidget {
 
 class _AutoMoveState extends State<AutoMove> {
   var dice = Random();
+  var allSound = Sound();
   int i = 0;
   List<int> a = [
     32,
@@ -147,7 +149,7 @@ class _AutoMoveState extends State<AutoMove> {
                       height: constraints.maxWidth / crossAxisCount,
                       decoration: const BoxDecoration(
                         shape: BoxShape.circle,
-                        color: Colors.cyanAccent,
+                        color: Colors.green,
                       ),
                     ),
                   ),
@@ -164,9 +166,11 @@ class _AutoMoveState extends State<AutoMove> {
           for (int j = 0; j < dice.nextInt(6) + 1; j++) {
             await Future.delayed(const Duration(milliseconds: 350));
             i++;
+            // allSound.pieceSound();
             setState(() {
               currentPosition = a[i];
             });
+            allSound.pieceSound();
           }
           //i = dice.nextInt(6) + 1 + i;
         }
