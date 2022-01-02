@@ -1,6 +1,7 @@
 import 'dart:math';
 import 'package:flutter/material.dart';
-import 'package:ludo2/widgets/test.dart';
+import 'package:ludo2/Piece_animation.dart';
+import 'package:ludo2/widgets/white_glow.dart';
 import 'package:ludo2/widgets/anti_tile.dart';
 import 'package:ludo2/widgets/selected_piece_glowing.dart';
 import 'package:ludo2/widgets/sound.dart';
@@ -34,7 +35,6 @@ class _MyHomePageState extends State<MyHomePage> {
   int g1Clear = 1;
 
   List greenPiecePath = [
-    32,
     91,
     92,
     93,
@@ -98,6 +98,19 @@ class _MyHomePageState extends State<MyHomePage> {
   List yellowValue = [];
   List blueValue = [];
   List redValue = [];
+//Testing
+  int crossAxisCount = 15;
+  int g1CurrentPosition = 32;
+  int g1Value = 0;
+
+  int g2CurrentPosition = 33;
+  int g2Value = 0;
+
+  int g3CurrentPosition = 47;
+  int g3Value = 0;
+  int g4CurrentPosition = 48;
+  int g4Value = 0;
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -237,6 +250,21 @@ class _MyHomePageState extends State<MyHomePage> {
                     double boardSize = size.height;
                     double pieceSize = size.height / 15;
 
+                    // Testing
+                    double boxWidth = constraints.maxWidth / 15;
+
+                    Offset getPosition(int index) {
+                      assert(boxWidth != null,
+                          "init boxWidth inside layoutBuilder");
+                      final dx = index <= crossAxisCount
+                          ? index * boxWidth
+                          : (index % crossAxisCount) * boxWidth;
+                      final dy = index <= crossAxisCount
+                          ? 0.0
+                          : (index / crossAxisCount).floor() * boxWidth;
+                      return Offset(dx, dy);
+                    }
+
                     return Stack(
                       clipBehavior: Clip.none,
                       children: <Widget>[
@@ -262,201 +290,327 @@ class _MyHomePageState extends State<MyHomePage> {
                                         border: Border.all(color: Colors.black),
                                       ),
                                     ),
-                                    Tile(
-                                      pieceSize: pieceSize,
-                                      color: Colors.greenAccent,
-                                      index: index,
-                                      accessedCell: greenPiecePath[g1],
-                                      child: GestureDetector(
-                                        onTap: () async {
-                                          print("I am pressed");
-                                          if (g1 + green <= 57) {
-                                            for (int i = 0; i < green; i++) {
-                                              await Future.delayed(
-                                                  Duration(milliseconds: 100));
-                                              setState(() {
-                                                g1Clear = g1;
-                                                g1 = g1 + 1;
-                                                allSound.pieceSound();
-                                              });
-                                            }
-                                            //green = 0;
-                                          }
-                                        },
-                                        child: Container(
-                                          child: green != 0
-                                              ? Glowing(
-                                                  pieceSize: pieceSize,
-                                                  color: Colors.greenAccent,
-                                                )
-                                              : null,
-                                          //height: pieceSize,
-                                          //width: pieceSize,
-                                          decoration: BoxDecoration(
-                                            borderRadius:
-                                                BorderRadius.circular(500),
-                                            border:
-                                                Border.all(color: Colors.black),
-                                            color: Colors.greenAccent,
-                                          ),
-                                        ),
-                                      ),
-                                    ),
-                                    IgnorePointer(
-                                      child: Center(
-                                        child: AntiTile(
-                                          index: index,
-                                          accessedCell: greenPiecePath[g1Clear],
-                                        ),
-                                      ),
-                                    ),
+                                    //// It is for g1 piece.s
+                                    // Tile(
+                                    //   pieceSize: pieceSize,
+                                    //   color: Colors.greenAccent,
+                                    //   index: index,
+                                    //   accessedCell: greenPiecePath[g1],
+                                    //   child: GestureDetector(
+                                    //     onTap: () async {
+                                    //       print("I am pressed");
+                                    //       if (g1 + green <= 57) {
+                                    //         for (int i = 0; i < green; i++) {
+                                    //           await Future.delayed(
+                                    //               Duration(milliseconds: 100));
+                                    //           setState(() {
+                                    //             g1Clear = g1;
+                                    //             g1 = g1 + 1;
+                                    //             allSound.pieceSound();
+                                    //           });
+                                    //         }
+                                    //         //green = 0;
+                                    //       }
+                                    //     },
+                                    //     child: Container(
+                                    //       child: green != 0
+                                    //           ? Glowing(
+                                    //               pieceSize: pieceSize,
+                                    //               color: Colors.greenAccent,
+                                    //             )
+                                    //           : null,
+                                    //       //height: pieceSize,
+                                    //       //width: pieceSize,
+                                    //       decoration: BoxDecoration(
+                                    //         borderRadius:
+                                    //             BorderRadius.circular(500),
+                                    //         border:
+                                    //             Border.all(color: Colors.black),
+                                    //         color: Colors.greenAccent,
+                                    //       ),
+                                    //     ),
+                                    //   ),
+                                    // ),
+                                    //// It is for abolishing the g1 point.
+                                    // IgnorePointer(
+                                    //   child: Center(
+                                    //     child: AntiTile(
+                                    //       index: index,
+                                    //       accessedCell: greenPiecePath[g1Clear],
+                                    //     ),
+                                    //   ),
+                                    // ),
                                   ],
                                 );
                               }),
                             ),
                           ),
                         ),
-                        // g1FromBoard:
+                        //g1 Piece
                         AnimatedPositioned(
-                          duration: Duration(milliseconds: 250),
-                          top: (g1FromBoard)
-                              ? (6 * boardSize / 15) // - 7.5
-                              : (2 * boardSize / 15),
-                          left: (g1FromBoard)
-                              ? (1 * boardSize / 15) - 7.5
-                              : (2 * boardSize / 15),
-                          child: GestureDetector(
-                            onTap: () {
-                              setState(() {
-                                g1FromBoard = !g1FromBoard;
-                                print('I am being pressed $g1FromBoard');
-                              });
-                            },
-                            child: Container(
-                              //margin: EdgeInsets.all(10),
-                              height: pieceSize,
-                              width: pieceSize,
-                              decoration: BoxDecoration(
-                                borderRadius: g1FromBoard
-                                    ? BorderRadius.circular(50)
-                                    : BorderRadius.circular(50),
-                                border: Border.all(color: Colors.black),
-                                color: g1FromBoard
-                                    ? Colors.green
-                                    : Colors.greenAccent,
-                              ),
+                          duration: Duration(milliseconds: 400),
+                          left: getPosition(g1CurrentPosition).dx,
+                          top: getPosition(g1CurrentPosition).dy,
+                          child: Container(
+                            alignment: Alignment.center,
+                            width: constraints.maxWidth / crossAxisCount,
+                            height: constraints.maxWidth / crossAxisCount,
+                            decoration: const BoxDecoration(
+                              shape: BoxShape.circle,
+                              color: Colors.green,
+                            ),
+                            child: GestureDetector(
+                              onTap: () async {
+                                if (g1Value + green <= 57) {
+                                  for (int j = 0; j < green; j++) {
+                                    await Future.delayed(
+                                        const Duration(milliseconds: 350));
+                                    setState(() {
+                                      g1CurrentPosition =
+                                          greenPiecePath[g1Value];
+                                      g1Value++;
+                                    });
+                                    allSound.pieceSound();
+                                  }
+                                }
+                              },
                             ),
                           ),
                         ),
-                        // g2FromBoard:
+                        //g2 Piece
                         AnimatedPositioned(
-                          duration: Duration(milliseconds: 250),
-                          top: (g2FromBoard)
-                              ? (6 * boardSize / 15)
-                              : (2 * boardSize / 15),
-                          left: (g2FromBoard)
-                              ? (1 * boardSize / 15) - 2.5
-                              : (3 * boardSize / 15),
-                          child: GestureDetector(
-                            onTap: () {
-                              setState(() {
-                                g2FromBoard = !g2FromBoard;
-                                print('I am being pressed $g2FromBoard');
-                              });
-                            },
-                            child: Container(
-                              height: pieceSize,
-                              width: pieceSize,
-                              decoration: BoxDecoration(
-                                borderRadius: g2FromBoard
-                                    ? BorderRadius.circular(50)
-                                    : BorderRadius.circular(50),
-                                border: Border.all(color: Colors.black),
-                                color:
-                                    g2FromBoard ? Colors.green : Colors.yellow,
-                              ),
+                          duration: Duration(milliseconds: 400),
+                          left: getPosition(g2CurrentPosition).dx,
+                          top: getPosition(g2CurrentPosition).dy,
+                          child: Container(
+                            alignment: Alignment.center,
+                            width: constraints.maxWidth / crossAxisCount,
+                            height: constraints.maxWidth / crossAxisCount,
+                            decoration: const BoxDecoration(
+                              shape: BoxShape.circle,
+                              color: Colors.yellow,
+                            ),
+                            child: GestureDetector(
+                              onTap: () async {
+                                if (g2Value + green <= 57) {
+                                  for (int j = 0; j < green; j++) {
+                                    await Future.delayed(
+                                        const Duration(milliseconds: 350));
+                                    setState(() {
+                                      g2CurrentPosition =
+                                          greenPiecePath[g2Value];
+                                      g2Value++;
+                                    });
+                                    allSound.pieceSound();
+                                  }
+                                }
+                              },
                             ),
                           ),
                         ),
-                        // g3FromBoard:
+                        //g3 Piece
                         AnimatedPositioned(
-                          duration: Duration(milliseconds: 250),
-                          top: (g3FromBoard)
-                              ? (6 * boardSize / 15)
-                              : (3 * boardSize / 15),
-                          left: (g3FromBoard)
-                              ? (1 * boardSize / 15) + 2.5
-                              : (3 * boardSize / 15),
-                          child: GestureDetector(
-                            onTap: () {
-                              setState(() {
-                                g3FromBoard = !g3FromBoard;
-                                print('I am being pressed $g3FromBoard');
-                              });
-                            },
-                            child: Container(
-                              height: pieceSize,
-                              width: pieceSize,
-                              decoration: BoxDecoration(
-                                borderRadius: g3FromBoard
-                                    ? BorderRadius.circular(50)
-                                    : BorderRadius.circular(50),
-                                border: Border.all(color: Colors.black),
-                                color: g3FromBoard ? Colors.green : Colors.blue,
-                              ),
+                          duration: Duration(milliseconds: 400),
+                          left: getPosition(g3CurrentPosition).dx,
+                          top: getPosition(g3CurrentPosition).dy,
+                          child: Container(
+                            alignment: Alignment.center,
+                            width: constraints.maxWidth / crossAxisCount,
+                            height: constraints.maxWidth / crossAxisCount,
+                            decoration: const BoxDecoration(
+                              shape: BoxShape.circle,
+                              color: Colors.red,
+                            ),
+                            child: GestureDetector(
+                              onTap: () async {
+                                if (g3Value + green <= 57) {
+                                  for (int j = 0; j < green; j++) {
+                                    await Future.delayed(
+                                        const Duration(milliseconds: 350));
+                                    setState(() {
+                                      g3CurrentPosition =
+                                          greenPiecePath[g3Value];
+                                      g3Value++;
+                                    });
+                                    allSound.pieceSound();
+                                  }
+                                }
+                              },
                             ),
                           ),
                         ),
-                        // g4FromBoard:
+                        //g4 Piece
                         AnimatedPositioned(
-                          duration: Duration(milliseconds: 250),
-                          top: (g4FromBoard)
-                              ? (6 * boardSize / 15)
-                              : (3 * boardSize / 15),
-                          left: (g4FromBoard)
-                              ? (1 * boardSize / 15) + 7.5
-                              : (2 * boardSize / 15),
-                          child: GestureDetector(
-                            onTap: () {
-                              setState(() {
-                                g4FromBoard = !g4FromBoard;
-                                print('I am being pressed $g4FromBoard');
-                              });
-                            },
-                            child: Container(
-                              height: pieceSize,
-                              width: pieceSize,
-                              decoration: BoxDecoration(
-                                borderRadius: g4FromBoard
-                                    ? BorderRadius.circular(50)
-                                    : BorderRadius.circular(50),
-                                border: Border.all(color: Colors.black),
-                                color: g4FromBoard ? Colors.green : Colors.red,
-                              ),
+                          duration: Duration(milliseconds: 400),
+                          left: getPosition(g4CurrentPosition).dx,
+                          top: getPosition(g4CurrentPosition).dy,
+                          child: Container(
+                            alignment: Alignment.center,
+                            width: constraints.maxWidth / crossAxisCount,
+                            height: constraints.maxWidth / crossAxisCount,
+                            decoration: const BoxDecoration(
+                              shape: BoxShape.circle,
+                              color: Colors.blue,
+                            ),
+                            child: GestureDetector(
+                              onTap: () async {
+                                if (g4Value + green <= 57) {
+                                  for (int j = 0; j < green; j++) {
+                                    await Future.delayed(
+                                        const Duration(milliseconds: 350));
+                                    setState(() {
+                                      g4CurrentPosition =
+                                          greenPiecePath[g4Value];
+                                      g4Value++;
+                                    });
+                                    allSound.pieceSound();
+                                  }
+                                }
+                              },
                             ),
                           ),
                         ),
+                        // // g1FromBoard:
+                        // AnimatedPositioned(
+                        //   duration: Duration(milliseconds: 250),
+                        //   top: (g1FromBoard)
+                        //       ? (6 * boardSize / 15) // - 7.5
+                        //       : (2 * boardSize / 15),
+                        //   left: (g1FromBoard)
+                        //       ? (1 * boardSize / 15) - 7.5
+                        //       : (2 * boardSize / 15),
+                        //   child: GestureDetector(
+                        //     onTap: () {
+                        //       setState(() {
+                        //         g1FromBoard = !g1FromBoard;
+                        //         print('I am being pressed $g1FromBoard');
+                        //       });
+                        //     },
+                        //     child: Container(
+                        //       //margin: EdgeInsets.all(10),
+                        //       height: pieceSize,
+                        //       width: pieceSize,
+                        //       decoration: BoxDecoration(
+                        //         borderRadius: g1FromBoard
+                        //             ? BorderRadius.circular(50)
+                        //             : BorderRadius.circular(50),
+                        //         border: Border.all(color: Colors.black),
+                        //         color: g1FromBoard
+                        //             ? Colors.green
+                        //             : Colors.greenAccent,
+                        //       ),
+                        //     ),
+                        //   ),
+                        // ),
+                        // // g2FromBoard:
+                        // AnimatedPositioned(
+                        //   duration: Duration(milliseconds: 250),
+                        //   top: (g2FromBoard)
+                        //       ? (6 * boardSize / 15)
+                        //       : (2 * boardSize / 15),
+                        //   left: (g2FromBoard)
+                        //       ? (1 * boardSize / 15) - 2.5
+                        //       : (3 * boardSize / 15),
+                        //   child: GestureDetector(
+                        //     onTap: () {
+                        //       setState(() {
+                        //         g2FromBoard = !g2FromBoard;
+                        //         print('I am being pressed $g2FromBoard');
+                        //       });
+                        //     },
+                        //     child: Container(
+                        //       height: pieceSize,
+                        //       width: pieceSize,
+                        //       decoration: BoxDecoration(
+                        //         borderRadius: g2FromBoard
+                        //             ? BorderRadius.circular(50)
+                        //             : BorderRadius.circular(50),
+                        //         border: Border.all(color: Colors.black),
+                        //         color:
+                        //             g2FromBoard ? Colors.green : Colors.yellow,
+                        //       ),
+                        //     ),
+                        //   ),
+                        // ),
+                        // // g3FromBoard:
+                        // AnimatedPositioned(
+                        //   duration: Duration(milliseconds: 250),
+                        //   top: (g3FromBoard)
+                        //       ? (6 * boardSize / 15)
+                        //       : (3 * boardSize / 15),
+                        //   left: (g3FromBoard)
+                        //       ? (1 * boardSize / 15) + 2.5
+                        //       : (3 * boardSize / 15),
+                        //   child: GestureDetector(
+                        //     onTap: () {
+                        //       setState(() {
+                        //         g3FromBoard = !g3FromBoard;
+                        //         print('I am being pressed $g3FromBoard');
+                        //       });
+                        //     },
+                        //     child: Container(
+                        //       height: pieceSize,
+                        //       width: pieceSize,
+                        //       decoration: BoxDecoration(
+                        //         borderRadius: g3FromBoard
+                        //             ? BorderRadius.circular(50)
+                        //             : BorderRadius.circular(50),
+                        //         border: Border.all(color: Colors.black),
+                        //         color: g3FromBoard ? Colors.green : Colors.blue,
+                        //       ),
+                        //     ),
+                        //   ),
+                        // ),
+                        // // g4FromBoard:
+                        // AnimatedPositioned(
+                        //   duration: Duration(milliseconds: 250),
+                        //   top: (g4FromBoard)
+                        //       ? (6 * boardSize / 15)
+                        //       : (3 * boardSize / 15),
+                        //   left: (g4FromBoard)
+                        //       ? (1 * boardSize / 15) + 7.5
+                        //       : (2 * boardSize / 15),
+                        //   child: GestureDetector(
+                        //     onTap: () {
+                        //       setState(() {
+                        //         g4FromBoard = !g4FromBoard;
+                        //         print('I am being pressed $g4FromBoard');
+                        //       });
+                        //     },
+                        //     child: Container(
+                        //       height: pieceSize,
+                        //       width: pieceSize,
+                        //       decoration: BoxDecoration(
+                        //         borderRadius: g4FromBoard
+                        //             ? BorderRadius.circular(50)
+                        //             : BorderRadius.circular(50),
+                        //         border: Border.all(color: Colors.black),
+                        //         color: g4FromBoard ? Colors.green : Colors.red,
+                        //       ),
+                        //     ),
+                        //   ),
+                        // ),
                         //Rotation Example:
-                        Positioned(
-                          top: 2 * boardSize / 15 - (pieceSize / 2),
-                          left: 6 * boardSize / 15 - (pieceSize / 2),
-                          child: Center(
-                            child: Container(
-                              child: TestRoration(
-                                color: Colors.blue,
-                                pieceSize: pieceSize,
-                              ),
-                              clipBehavior: Clip.none,
-                              height: pieceSize * 2,
-                              width: pieceSize * 2,
-                              // decoration: BoxDecoration(
-                              //   borderRadius: BorderRadius.circular(50),
-                              //   border: Border.all(color: Colors.black),
-                              //   color: Colors.transparent,
-                              // ),
-                            ),
-                          ),
-                        )
+                        // Positioned(
+                        //   top: 2 * boardSize / 15 - (pieceSize / 2),
+                        //   left: 6 * boardSize / 15 - (pieceSize / 2),
+                        //   child: Center(
+                        //     child: Container(
+                        //       child: TestRotation(
+                        //         color: Colors.blue,
+                        //         pieceSize: pieceSize,
+                        //       ),
+                        //       clipBehavior: Clip.none,
+                        //       height: pieceSize * 2,
+                        //       width: pieceSize * 2,
+                        //       // decoration: BoxDecoration(
+                        //       //   borderRadius: BorderRadius.circular(50),
+                        //       //   border: Border.all(color: Colors.black),
+                        //       //   color: Colors.transparent,
+                        //       // ),
+                        //     ),
+                        //   ),
+                        // ),
                       ],
                     );
                   },

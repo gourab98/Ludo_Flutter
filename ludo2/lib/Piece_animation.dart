@@ -1,45 +1,34 @@
 import 'dart:math';
 
 import 'package:flutter/material.dart';
-import 'package:flutter_staggered_animations/flutter_staggered_animations.dart';
-import 'package:ludo2/widgets/selected_piece_glowing.dart';
 import 'package:ludo2/widgets/sound.dart';
 
-class Piece_animation extends StatelessWidget {
-  const Piece_animation({
-    Key? key,
-  }) : super(key: key);
-
+// It is piece moving animation
+class MovingPiece extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
+    // return const MaterialApp(
+    //   debugShowCheckedModeBanner: false,
+    //   home: AutoMove(),
+    // );
     return Scaffold(
-      backgroundColor: Colors.transparent,
-      body: Center(
-        child: AnimatingPiece(),
-      ),
+      body: AutoMove(),
     );
   }
 }
 
-class AnimatingPiece extends StatefulWidget {
-  AnimatingPiece({Key? key}) : super(key: key);
+class AutoMove extends StatefulWidget {
+  const AutoMove({Key? key}) : super(key: key);
 
   @override
-  State<AnimatingPiece> createState() => _AnimatingPieceState();
+  _AutoMoveState createState() => _AutoMoveState();
 }
 
-class _AnimatingPieceState extends State<AnimatingPiece> {
+class _AutoMoveState extends State<AutoMove> {
   var dice = Random();
-
   var allSound = Sound();
-
-  int green = 0;
-
-  int g1 = 2;
-
-  int g1Clear = 1;
-
-  List greenPiecePath = [
+  int i = 0;
+  List<int> a = [
     32,
     91,
     92,
@@ -100,146 +89,118 @@ class _AnimatingPieceState extends State<AnimatingPiece> {
     111,
   ];
 
+  int currentPosition = 32;
+
+  double? boxWidth;
+  final int crossAxisCount = 15;
+
+  Offset getPosition(int index) {
+    assert(boxWidth != null, "init boxWidth inside layoutBuilder");
+    final dx = index <= crossAxisCount
+        ? index * boxWidth!
+        : (index % crossAxisCount) * boxWidth!;
+    final dy = index <= crossAxisCount
+        ? 0.0
+        : (index / crossAxisCount).floor() * boxWidth!;
+    return Offset(dx, dy);
+  }
+
   @override
   Widget build(BuildContext context) {
-    return Center(
-      child: Padding(
-        padding: EdgeInsets.only(top: 10.0),
-        child: AspectRatio(
-          aspectRatio: 1,
-          child: GridView.count(
-            crossAxisCount: 15,
-            childAspectRatio: 1,
-            children: List<Widget>.generate(
-              225,
-              (index) {
-                return Stack(
-                  fit: StackFit.passthrough,
-                  children: [
-                    GridTile(
-                      child: Container(
-                        child: Center(
-                          child: Text("$index"),
-                        ),
-                        decoration: BoxDecoration(
-                          color: Colors.white,
-                          borderRadius: BorderRadius.circular(0),
-                          border: Border.all(color: Colors.black),
-                        ),
+    return Scaffold(
+      body: SafeArea(
+        child: Padding(
+          padding: EdgeInsets.only(top: 25),
+          child: LayoutBuilder(
+            builder: (context, constraints) {
+              boxWidth = constraints.maxWidth / crossAxisCount;
+              return Stack(
+                children: [
+                  // Container(
+                  //   decoration: BoxDecoration(
+                  //     image: DecorationImage(
+                  //       image: AssetImage("assets/Ludo_board.png"),
+                  //       fit: BoxFit.fill,
+                  //     ),
+                  //   ),
+                  //   child: AspectRatio(
+                  //     aspectRatio: 1,
+                  //     child: GridView.count(
+                  //       crossAxisCount: crossAxisCount,
+                  //       children: [
+                  //         ...List.generate(
+                  //           225,
+                  //           (index) => Container(
+                  //             alignment: Alignment.center,
+                  //             decoration: BoxDecoration(
+                  //               border:
+                  //                   Border.all(color: Colors.black, width: .5),
+                  //             ),
+                  //             child: Text("$index"),
+                  //           ),
+                  //         ),
+                  //       ],
+                  //     ),
+                  //   ),
+                  // ),
+                  AnimatedPositioned(
+                    duration: const Duration(milliseconds: 400),
+                    left: getPosition(currentPosition).dx,
+                    top: getPosition(currentPosition).dy,
+                    child: Container(
+                      alignment: Alignment.center,
+                      width: constraints.maxWidth / crossAxisCount,
+                      height: constraints.maxWidth / crossAxisCount,
+                      decoration: const BoxDecoration(
+                        shape: BoxShape.circle,
+                        color: Colors.green,
                       ),
-                    ),
-                    Tile(
-                      pieceSize: 10.0,
-                      color: Colors.greenAccent,
-                      index: index,
-                      accessedCell: greenPiecePath[g1],
                       child: GestureDetector(
                         onTap: () async {
-                          green = dice.nextInt(6) + 1;
-                          print("I am pressed");
-                          if (g1 + green <= 57) {
-                            for (int i = 0; i < green; i++) {
-                              await Future.delayed(Duration(milliseconds: 100));
+                          if (i <= a.length) {
+                            print(
+                                'i = $i and the currentPosition= $currentPosition, ${a[i]}');
+                            print('Dice------------------>$i');
+                            //i = i + 1;
+                            for (int j = 0; j < dice.nextInt(6) + 1; j++) {
+                              await Future.delayed(
+                                  const Duration(milliseconds: 350));
+                              i++;
+                              // allSound.pieceSound();
                               setState(() {
-                                print('The number: $green');
-                                g1Clear = g1;
-                                g1 = g1 + 1;
-                                allSound.pieceSound();
+                                currentPosition = a[i];
                               });
+                              allSound.pieceSound();
                             }
+                            //i = dice.nextInt(6) + 1 + i;
                           }
                         },
                       ),
                     ),
-                    // IgnorePointer(
-                    //   child: Center(
-                    //     child: AntiTile(
-                    //       index: index,
-                    //       accessedCell: greenPiecePath[g1Clear],
-                    //     ),
-                    //   ),
-                    // ),
-                  ],
-                );
-              },
-            ),
+                  ),
+                ],
+              );
+            },
           ),
         ),
       ),
-    );
-  }
-}
-
-class Tile extends StatefulWidget {
-  Tile({
-    required this.pieceSize,
-    required this.color,
-    required this.index,
-    required this.accessedCell,
-    required this.child,
-    Key? key,
-  }) : super(key: key);
-
-  final int index;
-  final double pieceSize;
-  final int accessedCell;
-  final Color color;
-  Widget child;
-  @override
-  State<Tile> createState() => _TileState();
-}
-
-class _TileState extends State<Tile> {
-  bool _isAccessed = false;
-
-  @override
-  Widget build(BuildContext context) {
-    if (widget.accessedCell == widget.index) {
-      _isAccessed = true;
-    }
-
-    return Container(
-      child: _isAccessed ? widget.child : null,
-      height: widget.pieceSize,
-      width: widget.pieceSize,
-      decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(500),
-        border: _isAccessed ? Border.all(color: Colors.black) : null,
-        color: _isAccessed ? widget.color : null,
-      ),
-    );
-  }
-}
-
-class AntiTile extends StatefulWidget {
-  AntiTile({
-    required this.index,
-    required this.accessedCell,
-    Key? key,
-  }) : super(key: key);
-
-  final int index;
-  final int accessedCell;
-
-  @override
-  State<AntiTile> createState() => _AntiTileState();
-}
-
-class _AntiTileState extends State<AntiTile> {
-  bool _isAccessed = false;
-
-  @override
-  Widget build(BuildContext context) {
-    if (widget.accessedCell == widget.index) {
-      _isAccessed = true;
-    }
-
-    return Container(
-      decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(0),
-        border: Border.all(color: Colors.black),
-        color: _isAccessed ? Colors.white : Colors.transparent,
-      ),
+      // floatingActionButton: FloatingActionButton(onPressed: () async {
+      //   if (i <= a.length) {
+      //     print('i = $i and the currentPosition= $currentPosition, ${a[i]}');
+      //     print('Dice------------------>$i');
+      //     //i = i + 1;
+      //     for (int j = 0; j < dice.nextInt(6) + 1; j++) {
+      //       await Future.delayed(const Duration(milliseconds: 350));
+      //       i++;
+      //       // allSound.pieceSound();
+      //       setState(() {
+      //         currentPosition = a[i];
+      //       });
+      //       allSound.pieceSound();
+      //     }
+      //     //i = dice.nextInt(6) + 1 + i;
+      //   }
+      // }),
     );
   }
 }

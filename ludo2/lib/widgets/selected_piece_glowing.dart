@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 
-//File is changed.
 // This class is for glowing piece(Glowing effect comes from enhancing the broder of the piece container)
 class Glowing extends StatelessWidget {
   final double pieceSize;

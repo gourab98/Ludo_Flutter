@@ -162,6 +162,7 @@ class _AutoMoveState extends State<AutoMove> {
       floatingActionButton: FloatingActionButton(onPressed: () async {
         if (i <= a.length) {
           print('i = $i and the currentPosition= $currentPosition, ${a[i]}');
+          print('Dice------------------>$i');
           //i = i + 1;
           for (int j = 0; j < dice.nextInt(6) + 1; j++) {
             await Future.delayed(const Duration(milliseconds: 350));

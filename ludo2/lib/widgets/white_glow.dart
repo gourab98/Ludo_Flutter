@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 // This class is for piece glowing effect(Glowing effect comes from a border effect that enlarge in forward manner.)
 
-class TestRoration extends StatelessWidget {
+class TestRotation extends StatelessWidget {
   final double pieceSize;
   final Color color;
-  const TestRoration({
+  const TestRotation({
     Key? key,
     required this.pieceSize,
     required this.color,
